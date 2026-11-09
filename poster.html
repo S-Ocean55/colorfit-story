@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#f6f2ec" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#171614" media="(prefers-color-scheme: dark)">
+<title>ColorFit 포스터</title>
+<style>
+:root{
+  --bg:#f6f2ec; --panel:#fff; --ink:#1f1d1b; --muted:#6b645c; --line:#e4ddd3;
+  --spring:#e5825d; --summer:#7f90d2; --autumn:#b0612a; --winter:#2f3e78; --poster:#2a5298;
+  --good:#2f8a5b; --good-bg:#e5f3ea; --bad:#c2453b; --bad-bg:#f9e4e1; --warn:#8f6200; --warn-bg:#fbf0d6;
+  --deep:#f2eee8; --chip:#efe9e1; --hl:#e3ecfa; --shadow:0 1px 2px #0000000d,0 4px 14px #0000000a;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#171614; --panel:#23211e; --ink:#eeeae4; --muted:#a59d93; --line:#3a3631; --poster:#8eaef0;
+    --good:#5cc08a; --good-bg:#1d3327; --bad:#ec7b70; --bad-bg:#3a2220; --warn:#e2b552; --warn-bg:#3a3020;
+    --deep:#1c1b19; --chip:#2e2b27; --hl:#24324d; --summer:#a7b3ea; --winter:#8e9be0; --autumn:#d98c52; --shadow:0 1px 2px #00000040;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#171614; --panel:#23211e; --ink:#eeeae4; --muted:#a59d93; --line:#3a3631; --poster:#8eaef0;
+  --good:#5cc08a; --good-bg:#1d3327; --bad:#ec7b70; --bad-bg:#3a2220; --warn:#e2b552; --warn-bg:#3a3020;
+  --deep:#1c1b19; --chip:#2e2b27; --hl:#24324d; --summer:#a7b3ea; --winter:#8e9be0; --autumn:#d98c52; --shadow:0 1px 2px #00000040;
+}
+html{font-size:16px;-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:70px}
+html[data-size="lg"]{font-size:18.5px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:1.0625rem/1.75 "Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;word-break:keep-all;overflow-wrap:anywhere;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px calc(48px + env(safe-area-inset-bottom))}
+a{color:var(--winter)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) a{color:var(--summer)}}
+:root[data-theme="dark"] a{color:var(--summer)}
+.tabs{display:flex;gap:4px;padding:4px;margin:16px 0 0;border-radius:999px;background:var(--chip)}
+.tabs a{flex:1;text-align:center;min-height:44px;display:flex;align-items:center;justify-content:center;border-radius:999px;text-decoration:none;color:var(--ink);font-weight:600;font-size:.92rem}
+.tabs a[aria-current="page"]{background:var(--panel);box-shadow:var(--shadow)}
+header{padding:18px 0 4px}
+.eyebrow{font-size:.8rem;color:var(--muted)}
+h1{font-size:1.7rem;line-height:1.3;margin:4px 0 8px}
+h2{font-size:1.25rem;margin:0 0 6px}
+h3{font-size:1.02rem;margin:0}
+.lead{color:var(--muted);font-size:.98rem;margin:0}
+.small{font-size:.82rem;color:var(--muted)}
+.id{font-size:.72rem;color:var(--muted);white-space:nowrap}
+section{margin-top:22px}
+
+.sub{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);margin:12px -16px 0;padding:8px 16px;border-bottom:1px solid var(--line);display:flex;gap:8px;align-items:center}
+.seg{flex:1;display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--panel)}
+.seg button{flex:1;font:inherit;font-size:.92rem;font-weight:600;min-height:44px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--poster);color:#fff}
+.btn{font:inherit;font-size:.88rem;min-height:44px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;flex:none}
+
+.poster{display:block;margin:12px auto 0;max-width:420px;border-radius:12px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
+.poster img{display:block;width:100%;height:auto}
+.tour{margin:14px 0;padding:14px;border-radius:18px;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow)}
+.tour ol{margin:6px 0 0;padding-left:0;list-style:none;counter-reset:t}
+.tour li{position:relative;padding:6px 0 6px 40px;font-size:1rem;line-height:1.7}
+.tour li::before{counter-increment:t;content:counter(t);position:absolute;left:0;top:8px;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:.8rem;background:var(--poster)}
+.tour li small{display:block;color:var(--muted);font-size:.78rem}
+
+.panel{margin:14px 0;border-radius:18px;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden}
+.panel>h3{display:flex;align-items:center;gap:8px;padding:10px 14px;color:#fff;background:var(--poster);font-size:1rem}
+.panel>h3 .pn{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;background:#ffffff33;font-size:.8rem}
+.blk{padding:12px 14px;border-top:1px solid var(--line)}
+.blk:first-of-type{border-top:0}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:6px;background:var(--hl);color:var(--ink)}
+.tag.say{background:color-mix(in srgb,var(--good) 20%,var(--panel))}
+.quote{border-left:4px solid var(--poster);padding:6px 10px;background:var(--deep);border-radius:0 10px 10px 0;margin:4px 0;font-weight:600}
+.blk ul{margin:4px 0 0;padding-left:20px}
+.blk li{margin:4px 0;font-size:.97rem}
+.big2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.big2>div{border-radius:12px;padding:10px 12px;background:var(--deep)}
+.big2 .v{font-size:1.5rem;font-weight:800;color:var(--bad);line-height:1.2;font-variant-numeric:tabular-nums}
+.big2 .k{font-size:.85rem}
+.flow{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin:6px 0}
+.flow .lb{font-weight:700;font-size:.85rem;width:2.6em}
+.flow .n{font-size:.82rem;padding:5px 8px;border-radius:8px;border:1px solid var(--line);background:var(--panel)}
+.flow .n.new{background:var(--hl);border-color:var(--poster);font-weight:700}
+.flow .ar{color:var(--muted);font-size:.8rem}
+.math{font-family:ui-monospace,Consolas,monospace;font-size:.82rem;background:var(--chip);border-radius:10px;padding:8px 10px;overflow-x:auto;white-space:nowrap;margin:6px 0}
+.bars{margin:6px 0}
+.bar{margin:8px 0}
+.bar .bl{display:flex;justify-content:space-between;font-size:.88rem}
+.bar .bl span{color:var(--muted)}
+.bar .track{position:relative;height:14px;border-radius:7px;background:var(--chip);margin-top:4px;overflow:hidden}
+.bar .track i{position:absolute;inset:0 auto 0 0;border-radius:7px;background:#b9bfca}
+.bar.after .track i{background:var(--poster)}
+.vline{position:absolute;top:0;bottom:0;width:2px;background:var(--bad);z-index:1}
+
+details.why{margin:0 12px 12px;border-radius:14px;background:var(--deep);border:1px dashed color-mix(in srgb,var(--poster) 50%,var(--line))}
+details.why>summary{list-style:none;cursor:pointer;min-height:48px;display:flex;align-items:center;gap:8px;padding:10px 14px;font-weight:650;font-size:.95rem}
+details.why>summary::-webkit-details-marker{display:none}
+details.why>summary .ar2{margin-left:auto;font-weight:400;font-size:.8rem;color:var(--muted);white-space:nowrap}
+details.why>summary .ar2::after{content:"펼치기 ▾"}
+details.why[open]>summary .ar2::after{content:"접기 ▴"}
+details.why>div{padding:0 14px 12px}
+details.why h4{margin:10px 0 2px;font-size:.92rem}
+details.why p,details.why li{font-size:.93rem}
+details.why ul{padding-left:20px;margin:4px 0}
+
+.warnbox{margin:14px 0;padding:12px 14px;border-radius:16px;background:var(--warn-bg);border:1px solid color-mix(in srgb,var(--warn) 35%,transparent)}
+.warnbox h3{color:var(--warn);margin-bottom:6px}
+.fix{display:grid;gap:8px;margin-top:6px}
+.fix>div{background:var(--panel);border-radius:12px;padding:8px 12px;font-size:.93rem}
+.fix .p{font-weight:700}
+.fix .p::before{content:"포스터: ";color:var(--muted);font-weight:400}
+.fix .s::before{content:"말로: ";color:var(--good);font-weight:700}
+
+/* 질문 */
+.qtools{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.qgroup{margin:18px 0 6px;font-size:1rem;display:flex;gap:8px;align-items:center}
+.qgroup i{width:10px;height:10px;border-radius:3px;background:var(--poster)}
+details.qa{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin:8px 0}
+details.qa>summary{list-style:none;cursor:pointer;min-height:48px;display:flex;gap:10px;align-items:flex-start;padding:12px 14px;font-weight:650;line-height:1.5}
+details.qa>summary::-webkit-details-marker{display:none}
+details.qa .qn{flex:none;min-width:2.4em;color:var(--muted);font-variant-numeric:tabular-nums}
+details.qa .hint{margin-left:auto;flex:none;font-weight:400;font-size:.78rem;color:var(--muted);padding-top:2px}
+details.qa[open] .hint{display:none}
+details.qa .ans{margin:0 14px;padding:10px 0 14px;border-top:1px dashed var(--line);font-size:.97rem}
+details.qa .src{display:block;margin-top:6px;font-size:.78rem;color:var(--muted)}
+.where{display:inline-block;font-size:.72rem;font-weight:700;padding:1px 7px;border-radius:999px;background:var(--hl);margin-right:6px}
+footer{margin-top:28px;font-size:.78rem;color:var(--muted)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="tabs" aria-label="페이지">
+  <a href="1min.html">1분 요약</a>
+  <a href="poster.html" aria-current="page">포스터</a>
+  <a href="./">전체 스토리</a>
+</nav>
+
+<header>
+  <div class="eyebrow">포스터 v11(10/26) 기준</div>
+  <h1>포스터로 설명하기</h1>
+  <p class="lead">포스터 앞에서 손가락으로 짚으며 말하는 순서, 판넬마다 덧붙일 말, 포스터만 보고 나올 질문을 모았다.</p>
+</header>
+
+<div class="sub" role="group" aria-label="보기 고르기">
+  <div class="seg">
+    <button type="button" data-view="sum" aria-pressed="true">정리</button>
+    <button type="button" data-view="qa" aria-pressed="false">포스터 질문</button>
+  </div>
+  <button class="btn" type="button" id="fontBtn" aria-pressed="false">글자 크게</button>
+</div>
+
+<!-- 정리 -->
+<div id="view-sum">
+  <a class="poster" href="poster.jpg" target="_blank" rel="noopener" aria-label="포스터 크게 보기"><img src="poster.jpg" alt="ColorFit 포스터: 제작배경 및 목적, 작품개요, 내용 및 설명, 개발결과 및 기대효과" loading="lazy"></a>
+  <p class="small" style="text-align:center;margin:6px 0 0">누르면 크게 열린다</p>
+
+  <div class="tour">
+    <h2>포스터 앞 40초 (짚는 순서)</h2>
+    <ol>
+      <li>ColorFit은 퍼스널컬러 결과를 <b>내 옷장 코디까지</b> 잇는 앱입니다.<small>제목</small></li>
+      <li>퍼스널컬러를 알아도 오늘 뭘 입을지 몰랐고, 재 보니 조명만 바꿔도 진단이 <b>39.87%</b> 흔들리고, 색 규칙으론 진짜 코디를 <b>동전 수준(0.486)</b>으로밖에 못 골랐습니다.<small>제작배경 및 목적</small></li>
+      <li>그래서 <b>진단</b>과 <b>추천</b> 두 줄을 만들었고, 두 줄은 '어울림'에서 만납니다. <b>파란 칸</b>이 새로 만든 부분입니다.<small>작품개요</small></li>
+      <li>얼굴 부위끼리 색을 빼서 <b>조명을 지우고</b>, 실제 코디 데이터로 <b>옷 조합</b>을 학습했습니다.<small>내용 및 설명</small></li>
+      <li>같은 조건에서 흔들림은 <b>약 3.5분의 1</b>, 진짜 코디 가려내기는 <b>0.486 → 0.883</b>. 다만 합성 조명 결과라 실제 조명은 다음 과제입니다.<small>개발결과 및 기대효과</small></li>
+    </ol>
+  </div>
+
+  <!-- 판넬 1 -->
+  <article class="panel" id="p1">
+    <h3><span class="pn">1</span>제작배경 및 목적</h3>
+    <div class="blk"><span class="tag">포스터에 적힌 것</span>
+      <div class="quote">퍼스널컬러를 알아도, 오늘 뭘 입을지 모른다. → 진단부터 오늘 코디까지 잇는다</div>
+      <div class="big2"><div><div class="v">39.87%</div><div class="k">합성 조명에서 진단이 흔들림</div></div><div><div class="v">0.486</div><div class="k">색 규칙으론 코디를 못 고름</div></div></div>
+    </div>
+    <div class="blk"><span class="tag say">말로 덧붙일 것</span><ul>
+      <li>계기: 축제에서 "여름 쿨톤"을 받았는데 옷장 앞에서 몰랐다.</li>
+      <li><b>39.87%</b> = 같은 사진의 <b>조명 색만</b> 바꿨을 때 4계절 판정이 바뀐 비율. 10번 중 4번.</li>
+      <li><b>0.486</b> = 진짜 코디와 가짜 코디 중 진짜를 더 높게 매길 확률. 동전(0.5)과 같다.</li>
+    </ul></div>
+    <details class="why"><summary>근거·조건<span class="ar2"></span></summary><div>
+      <h4>39.87%의 조건</h4><p>개발 사진 338장, 학습에 쓰지 않은 합성 조명(화이트밸런스 설정) 4종, 기존 절대 색 방식, 사진 1장. S3.</p>
+      <h4>0.486의 조건</h4><p>앱의 색 조화 규칙을 Polyvore 고정 시험(15,741문항)에서 잰 AUC. 색 조화 이론식도 0.515였다. C3·C4.</p>
+      <h4>포스터에서 뺀 세 번째 문제</h4><p>옷 사진도 조명만 바뀌면 어울림 등급이 42.83% 바뀌었다. 흰 배경 기준 보정으로 33.56%(연구 보정 31.91%). 공간 때문에 포스터는 진단·코디 두 개만 남겼다. C2b.</p>
+    </div></details>
+  </article>
+
+  <!-- 판넬 2 -->
+  <article class="panel" id="p2">
+    <h3><span class="pn">2</span>작품개요</h3>
+    <div class="blk"><span class="tag">포스터에 적힌 것</span>
+      <div class="flow"><span class="lb">진단</span><span class="n">얼굴 사진</span><span class="ar">→</span><span class="n">부위 분할</span><span class="ar">→</span><span class="n new">색 특징</span><span class="ar">→</span><span class="n new">계절 분류</span><span class="ar">→</span><span class="n">팔레트</span></div>
+      <div class="flow"><span class="lb">추천</span><span class="n">옷 사진</span><span class="ar">→</span><span class="n new">조명 보정</span><span class="ar">→</span><span class="n">대표색</span><span class="ar">→</span><span class="n">어울림</span><span class="ar">→</span><span class="n new">오늘 코디</span></div>
+      <p class="small" style="margin:4px 0 0">팔레트가 아래 '어울림'으로 내려온다. 데이터: Deep Armocromia · Polyvore · DeepFashion</p>
+    </div>
+    <div class="blk"><span class="tag say">말로 덧붙일 것</span><ul>
+      <li>두 줄은 <b>'어울림'</b>에서 만난다. 내 팔레트와 옷 대표색의 색 차이가 어울림 점수다.</li>
+      <li><b>파란 칸 4개</b>(색 특징·계절 분류·조명 보정·오늘 코디)가 이 연구에서 새로 만든 단계다.</li>
+    </ul></div>
+    <details class="why"><summary>칸마다 무엇을 썼나<span class="ar2"></span></summary><div>
+      <ul>
+        <li><b>부위 분할</b>: 연구는 FACER(얼굴 분할 모델)로 피부·머리·눈. 앱은 MediaPipe 얼굴 점 478개</li>
+        <li><b>색 특징(새로)</b>: Hybrid 12개 = 밝기 6 + 부위 간 로그 색도 차이 6</li>
+        <li><b>계절 분류(새로)</b>: 다항 로지스틱 회귀로 4계절. 11/10부터 공개 앱 사진의 웜/쿨 판정에 쓰고, 밝기·선명도는 질문 5개가 정한다</li>
+        <li><b>팔레트</b>: 12유형별 색 묶음(여름쿨 뮤트 등)</li>
+        <li><b>조명 보정(새로)</b>: 옷 사진의 흰 배경을 기준으로 조명 색을 되돌림</li>
+        <li><b>대표색</b>: CIELAB에서 K-means로 최대 3색 + 면적 비율</li>
+        <li><b>어울림</b>: 팔레트까지 CIEDE2000 거리 → 찰떡 88 · 잘 맞음 74 · 무난 58(K17)</li>
+        <li><b>오늘 코디(새로)</b>: 날씨·상황으로 먼저 거르고 4축 점수(퍼컬 0.38·조화 0.28·날씨 0.22·보유 0.12). 학습 조합 모델은 개발 경로</li>
+      </ul>
+      <h4>데이터 셋은 각각 어디에</h4>
+      <ul>
+        <li><b>Deep Armocromia</b>(얼굴 4,920장, K1): 진단 모델 학습·평가</li>
+        <li><b>Polyvore</b>(실제 코디): 조합 모델 학습·고정 시험</li>
+        <li><b>DeepFashion</b>(44,096장, K5): 옷 속성(소매·소재·무늬) 연구. 공개 앱의 옷 종류 인식은 FashionSigLIP 제로샷이라 이 모델을 쓰지 않는다</li>
+      </ul>
+    </div></details>
+  </article>
+
+  <!-- 판넬 3 -->
+  <article class="panel" id="p3">
+    <h3><span class="pn">3</span>내용 및 설명</h3>
+    <div class="blk"><span class="tag">① 진단: 조명 지우기</span>
+      <div class="math">ln(I피부,R / I피부,G) − ln(I머리,R / I머리,G) = ln(ρ피부,R / ρ피부,G) − ln(ρ머리,R / ρ머리,G)</div>
+      <div class="quote">부위끼리 색을 빼면 조명이 지워진다 · 얼굴 1,306장 · 조명 변형 6종 학습 · 사진 3장 평균으로 한 번 더 안정</div>
+    </div>
+    <div class="blk"><span class="tag say">말로 덧붙일 것</span><ul>
+      <li>I = 사진에 찍힌 색, ρ = 사람 고유 색. 사진 색 = 조명 × 사람 색이라, 같은 사진의 피부·머리 색을 로그로 빼면 <b>조명이 사라지고 사람 색만 남는다</b>.</li>
+      <li>"사진 3장 평균"은 <b>같은 사진에 합성 조명 3가지를 입혀 평균</b>한 것이다. 실제로 세 번 찍은 게 아니다.</li>
+    </ul></div>
+    <div class="blk"><span class="tag">② 코디: 실제 코디 학습</span>
+      <div class="math">s(a, b) = MLP([eₐ + e_b,  |eₐ − e_b|,  eₐ ⊙ e_b])</div>
+      <div class="quote">진짜 vs 한 벌 바꾼 가짜 코디 구분 · Polyvore 코디 11,311개로 학습 · 날씨·상황 조건은 먼저 지킨다</div>
+    </div>
+    <div class="blk"><span class="tag say">말로 덧붙일 것</span><ul>
+      <li>e = 옷 사진을 FashionSigLIP으로 바꾼 768개 숫자. 합·차이·곱을 붙여 <b>순서와 무관한</b> 쌍 점수를 낸다. 코디 점수 = 모든 옷 쌍의 평균.</li>
+      <li>"한 벌 바꾼 가짜"는 <b>학습용 오답</b>(같은 종류 다른 옷으로 교체). 시험의 가짜 코디는 여러 코디의 옷을 섞은 것.</li>
+      <li>"날씨·상황 먼저": 조합 점수만 쓰면 432가지 중 8번 "발표 날 캐주얼"이 나왔다. 먼저 거르니 0번(§17).</li>
+    </ul></div>
+    <details class="why"><summary>원리·학습 세부<span class="ar2"></span></summary><div>
+      <h4>왜 밝기는 따로?</h4><p>나누면 밝기도 지워진다. 밝기는 계절 구분에 중요해서 L*를 따로 붙여 12특징(Hybrid)을 만들었다. 상대 색만 쓰면 정확도 44.38%(D2).</p>
+      <h4>조명 변형 6종 학습이면 평가는?</h4><p>화이트밸런스 10종 중 텅스텐·주광·그늘 6종은 학습, 형광등·흐림 4종은 평가 전용. 처음 보는 조명에서 재야 공정하다.</p>
+      <h4>왜 로지스틱 회귀?</h4><p>사진 1,306장뿐이다. 딥 특징 모델은 교차검증 43.34%(F4a)로 색 특징 55.92%(D1)보다 낮았다.</p>
+      <h4>왜 같은 종류로 오답을?</h4><p>신발 자리에 모자처럼 쉬운 오답만 보면 "종류가 맞나"만 배운다. 같은 종류 안에서 골라야 "어울리나"를 배운다.</p>
+      <p class="small">1,306은 K3. 11,311·학습 방식 세부는 논문 방법 절 근거(정본 수치표 미등록).</p>
+    </div></details>
+  </article>
+
+  <!-- 판넬 4 -->
+  <article class="panel" id="p4">
+    <h3><span class="pn">4</span>개발결과 및 기대효과</h3>
+    <div class="blk"><span class="tag">① 진단 흔들림 약 3.5분의 1</span>
+      <p class="small" style="margin:0">합성 조명 · 사진 3장 · 연구 모델</p>
+      <div class="bars">
+        <div class="bar"><div class="bl"><span>기존</span><b>30.03%</b></div><div class="track"><i style="width:30.03%"></i></div></div>
+        <div class="bar after"><div class="bl"><span>개선</span><b>8.51%</b></div><div class="track"><i style="width:8.51%"></i></div></div>
+      </div>
+    </div>
+    <div class="blk"><span class="tag say">말로 덧붙일 것</span><ul>
+      <li>문제 칸의 39.87%는 <b>사진 1장</b>, 여기 30.03%는 <b>합성 조명 3가지 평균</b> 조건이다. 같은 조건끼리 비교했다. 1장끼리는 39.87% → 11.91%(S3), 3가지 평균끼리 30.03% → 8.51%(S8).</li>
+      <li>대가: 정확도 55.92% → 52.07%(−3.85%p, S4). 실제 조명 12명 자료에선 개선을 확인하지 못했다(S7).</li>
+    </ul></div>
+    <div class="blk"><span class="tag">② 진짜 코디를 더 높게 매길 확률</span>
+      <p class="small" style="margin:0">무작위 0.5 · 연구 모델 · 고정 시험 (점선 = 0.5)</p>
+      <div class="bars">
+        <div class="bar"><div class="bl"><span>기존 (색 규칙)</span><b>0.486</b></div><div class="track"><i style="width:48.6%"></i><span class="vline" style="left:50%"></span></div></div>
+        <div class="bar after"><div class="bl"><span>개선 (학습 모델)</span><b>0.883</b></div><div class="track"><i style="width:88.3%"></i><span class="vline" style="left:50%"></span></div></div>
+      </div>
+    </div>
+    <div class="blk"><span class="tag say">말로 덧붙일 것</span><ul>
+      <li>AUC는 정답률이 아니다. 빠진 옷 4지선다로는 58.57%(색 규칙 24.84%, 찍기 25%). C3·C5.</li>
+      <li>이 0.883 모델은 <b>공개 앱 점수에는 넣지 않았다</b>(데이터 이용 조건). 공개 앱은 날씨·상황 + 4축 점수.</li>
+    </ul></div>
+    <div class="blk"><span class="tag">앱 화면 4장 · 기대효과</span>
+      <div class="quote">결과 카드(여름쿨 뮤트) · 내 옷장 · 추천 · 오늘의 룩 → 기대효과: 앱으로 매일 쉽게 코디</div>
+      <ul>
+        <li>캡처는 포스터를 만든 10월 화면이다. 지금 앱은 메뉴·추천 카드 넘기기 등이 바뀌었다. 시연은 지금 앱으로.</li>
+        <li>"매일 쉽게"는 기대효과다. 사람 평가는 아직 없고 다음 과제다.</li>
+      </ul>
+    </div>
+  </article>
+
+  <div class="warnbox">
+    <h3>포스터만 보면 오해할 수 있는 곳 → 말로 바로잡기</h3>
+    <div class="fix">
+      <div><div class="p">사진 3장 평균으로 한 번 더 안정</div><div class="s">같은 사진에 합성 조명 3가지를 입혀 평균. 실제 세 번 촬영 아님(논문 4.3.3)</div></div>
+      <div><div class="p">문제 39.87% / 결과 기존 30.03%</div><div class="s">조건이 다르다(1장 vs 3가지 평균). 같은 조건끼리만 비교</div></div>
+      <div><div class="p">진짜 vs 한 벌 바꾼 가짜</div><div class="s">학습용 오답. 시험의 가짜는 여러 코디 옷을 섞은 것</div></div>
+      <div><div class="p">연구 모델 0.883</div><div class="s">공개 앱 점수엔 없다. 공개 앱에 들어간 연구 모델은 사진 웜/쿨 판정뿐(11/10부터)</div></div>
+      <div><div class="p">데이터 DeepFashion</div><div class="s">옷 속성 연구용. 공개 앱 옷 종류 인식은 다른 방식(FashionSigLIP 제로샷)</div></div>
+      <div><div class="p">앱 화면 4장</div><div class="s">10월 화면. 시연은 지금 앱으로</div></div>
+      <div><div class="p">지도교수·학번·성명 [입력] · CSE-XX</div><div class="s">출력본에 남아 있으면 말로 소개</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 질문 -->
+<div id="view-qa" hidden>
+  <section>
+    <h2>포스터를 보고 나올 질문</h2>
+    <p class="small" style="margin:0">판넬 순서대로. 질문만 보고 답해 본 뒤 눌러서 확인.</p>
+    <div class="qtools">
+      <button class="btn" type="button" id="qaOpen">답 모두 보기</button>
+      <button class="btn" type="button" id="qaClose">답 모두 숨기기</button>
+    </div>
+    <div id="qaList"></div>
+  </section>
+</div>
+
+<footer>숫자 옆 기호(S3 등)는 수치-출처 행 번호. 더 깊은 이유는 [전체 스토리], 말하기 연습은 [1분 요약] 탭.</footer>
+</div>
+
+<script>
+(function(){
+  function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);}catch(e){return null;}}
+  var root=document.documentElement,fb=document.getElementById('fontBtn');
+  function setSize(lg){if(lg)root.setAttribute('data-size','lg');else root.removeAttribute('data-size');fb.setAttribute('aria-pressed',String(lg));fb.textContent=lg?'글자 보통':'글자 크게';store('cf-poster-size',lg?'lg':'');}
+  setSize(store('cf-poster-size')==='lg');
+  fb.addEventListener('click',function(){setSize(root.getAttribute('data-size')!=='lg');});
+
+  // 정리 / 포스터 질문 전환 (주소 #qa로 바로 열기)
+  var btns=[].slice.call(document.querySelectorAll('.seg button'));
+  function show(v,scroll){
+    document.getElementById('view-sum').hidden=v!=='sum';
+    document.getElementById('view-qa').hidden=v!=='qa';
+    btns.forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.view===v));});
+    try{history.replaceState(null,'',v==='qa'?'#qa':'#sum');}catch(e){}
+    if(scroll)window.scrollTo({top:0});
+  }
+  btns.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.view,true);});});
+  show(location.hash==='#qa'?'qa':'sum',false);
+
+  // [판넬, 질문, 답, 근거]
+  var QA=[
+    ['제작배경 및 목적','"퍼스널컬러를 알아도 뭘 입을지 모른다"는 근거가 있나?','제 경험(축제 진단)에서 출발했습니다. 사용자 수요 조사는 하지 않았습니다. 다만 진단 서비스는 많은데, 진단을 내가 가진 옷과 이어 주는 서비스는 드물었습니다.','본인 경험'],
+    ['제작배경 및 목적','39.87%는 정확히 무엇을 잰 숫자인가?','같은 사진의 조명 색만 바꿨을 때 4계절 판정이 바뀐 비율입니다. 개발 사진 338장, 학습에 쓰지 않은 합성 조명 4종, 기존 절대 색 방식, 사진 1장 조건입니다. 10번 중 4번꼴로 다른 계절이 나왔습니다.','S3'],
+    ['제작배경 및 목적','"합성 조명"이면 실제 조명에서는?','사진의 화이트밸런스를 실제 카메라 설정처럼 바꾸는 변형(WB Color Augmenter)입니다. 실제 여러 조명에서 찍은 12명 자료(SoF)로도 확인했는데, 개선을 확인하지 못했습니다. 그래서 앱은 이미 받은 진단을 넣는 길과 두 계열 표시를 함께 둡니다.','S7'],
+    ['제작배경 및 목적','0.486은 무슨 숫자이고, 왜 "못 고른다"고 했나?','진짜 코디와 가짜 코디를 한 쌍씩 비교할 때 진짜를 더 높게 매길 확률(AUC)입니다. 무작위가 0.5인데 앱의 색 조화 규칙이 0.486이었습니다. 색 조화 이론식도 0.515였습니다. 색만으로는 코디를 가려내지 못한다는 뜻입니다.','C3·C4'],
+
+    ['작품개요','파란 칸은 무슨 뜻인가?','이 연구에서 새로 만든 단계입니다. 색 특징(Hybrid 12개), 계절 분류(조명 학습 로지스틱 회귀), 조명 보정(옷 사진 흰 배경 기준), 오늘 코디(날씨·상황 먼저 거르는 추천)입니다.','포스터 제작 메모'],
+    ['작품개요','부위 분할은 무엇으로 했나? 앱도 같은가?','연구에서는 FACER라는 얼굴 분할 모델로 피부·머리·눈 영역을 나눴습니다. 앱은 브라우저에서 MediaPipe로 얼굴 점 478개를 찾아 그 자리 색을 읽습니다. 얼굴 사진은 서버로 보내지 않습니다.','논문 3.3.2, 4.8'],
+    ['작품개요','계절 분류는 4계절인가 12유형인가?','모델의 주 출력은 4계절입니다. 12유형은 계절 안 세부 유형을 따로 정합니다. 사진만의 12유형 정확도는 26.89%로 우연(8.3%)의 3.2배라 약해서, 앱은 질문과 직접 고르기로 보완합니다.','T17·Z7'],
+    ['작품개요','"어울림"은 어떻게 계산하나?','옷의 대표색(최대 3개, 면적 비율 포함)과 내 팔레트 색 사이의 CIEDE2000 색 차이로 점수를 냅니다. 가까울수록 100점에 가깝고, 찰떡 88·잘 맞음 74·무난 58 기준으로 등급을 매깁니다.','K17'],
+    ['작품개요','조명 보정 결과는 포스터에 왜 없나?','공간 때문에 진단과 코디 두 가지만 남겼습니다. 옷 사진은 조명만 바뀌어도 어울림 등급이 42.83% 바뀌었고, 앱의 흰 배경 기준 보정으로 33.56%가 됐습니다(연구 보정은 31.91%).','C2b'],
+    ['작품개요','데이터 세 개는 각각 어디에 썼나?','Deep Armocromia(얼굴 4,920장)는 진단 모델, Polyvore는 코디 조합 모델, DeepFashion(44,096장)은 옷 속성 연구에 썼습니다. DeepFashion 모델은 공개 앱에 넣지 않았고, 앱의 옷 종류 인식은 FashionSigLIP 제로샷 방식입니다.','K1·K5'],
+
+    ['내용 및 설명','수식의 뜻을 설명해 달라.','사진에 찍힌 색 I는 조명 g와 사람 고유 색 ρ의 곱입니다. 로그를 씌우면 곱이 더하기가 되고, 같은 사진의 피부와 머리는 같은 조명을 받으니 둘을 빼면 g가 사라집니다. 그래서 왼쪽(사진 색)이 오른쪽(사람 색)과 같아집니다. 단, 빛의 양으로 되돌린(선형) RGB에서 계산해야 성립합니다.','논문 3.3.1'],
+    ['내용 및 설명','조명을 지우면 밝기 정보도 사라지지 않나?','맞습니다. 비율로 나누면 밝기도 지워집니다. 밝기는 계절 구분에 중요해서 원래 밝기(L*) 6개를 따로 붙여 12특징으로 만들었습니다. 비교 특징만 쓰면 정확도가 44.38%로 떨어졌습니다.','D2'],
+    ['내용 및 설명','1,306장으로 충분한가? 왜 딥러닝이 아닌가?','적어서 작은 모델을 썼습니다. 얼굴 딥 특징을 넣은 모델은 교차검증 43.34%로, 색 특징 55.92%보다 낮았습니다. 사람 단위로 나눠 같은 사람이 학습·평가에 섞이지 않게 했습니다.','F4a·D1·K3'],
+    ['내용 및 설명','"조명 변형 6종 학습"이면 평가는 무엇으로?','화이트밸런스 10종 중 텅스텐·주광·그늘 6종은 학습에, 형광등·흐림 4종은 평가에만 썼습니다. 다만 평가 조명은 학습 조명 사이의 설정이고 같은 생성기에서 나왔다는 한계가 있습니다.','논문 3.4.2·5.2'],
+    ['내용 및 설명','"사진 3장 평균"은 실제로 세 번 찍은 것인가?','아닙니다. 같은 사진 한 장에 합성 조명 3가지를 입혀 확률을 평균했습니다. 서로 다른 실제 사진 1장 → 3장은 따로 탐색했고, 4계열 정확도가 49.23%에서 58.66%로 올랐습니다(73명, 확정 성능 아님).','S8, §15'],
+    ['내용 및 설명','s(a, b) 수식은 무엇인가?','두 옷 사진의 특징 eₐ, e_b(FashionSigLIP 768차원)를 합·차이의 크기·곱으로 붙여 작은 신경망에 넣고, 두 옷이 같은 코디일 확률을 냅니다. 세 가지 모두 순서를 바꿔도 같아서 상의-하의 순서와 무관합니다. 코디 점수는 모든 옷 쌍 점수의 평균입니다.','논문 3.8'],
+    ['내용 및 설명','"한 벌 바꾼 가짜 코디"는 어떻게 만들었나?','학습할 때 진짜 코디의 한 벌을 같은 종류의 다른 옷으로 바꿨습니다. 다른 종류로 바꾸면 너무 쉬워서 어울림을 못 배웁니다. 시험의 가짜 코디는 여러 코디의 옷을 섞은 것입니다.','논문 3.8, 시험 구조 점검'],
+    ['내용 및 설명','"날씨·상황 조건은 먼저 지킨다"는 무슨 뜻인가?','날씨와 상황(출근·데이트·발표)으로 맞지 않는 옷을 먼저 거른 뒤, 그 안에서만 점수로 고릅니다. 조합 점수만으로 정렬하면 432가지 중 8번 상황이 나빠졌고, 먼저 거르면 0번이었습니다.','§17·Z17'],
+
+    ['개발결과 및 기대효과','문제 칸은 39.87%인데 결과 칸 기존은 왜 30.03%인가?','조건이 다릅니다. 39.87%는 사진 1장, 30.03%는 합성 조명 3가지 평균 조건의 기존 방식입니다. 같은 조건끼리 비교하면 1장은 39.87% → 11.91%(약 3.3분의 1), 3가지 평균은 30.03% → 8.51%(약 3.5분의 1)입니다.','S3·S8'],
+    ['개발결과 및 기대효과','흔들림이 줄면서 정확도는?','원본 사진 정확도가 55.92%에서 52.07%로 3.85%p 낮아졌습니다. 미리 정한 기준을 넘지 못했으므로 "정확도 유지"라고 하지 않습니다. 덜 흔들리는 대신 조금 덜 맞히는 절충입니다. 선행 연구도 4계절 0.55 수준입니다.','S4·D3'],
+    ['개발결과 및 기대효과','"고정 시험"이 무엇인가?','시험 자료는 모델을 다 고른 뒤 마지막에 한 번만 채점했다는 뜻입니다. 시험 점수를 보며 모델을 고르면 점수가 부풀려집니다. 코디 시험은 Polyvore 15,741문항이었습니다.','C3·C5'],
+    ['개발결과 및 기대효과','0.883이면 10번 중 9번 맞힌다는 뜻인가? 앱에도 들어갔나?','정답률이 아니라 진짜·가짜 짝 비교 확률입니다. 빠진 옷 4지선다 정답률은 58.57%(색 규칙 24.84%, 찍기 25%)입니다. 이 모델은 공개 앱 점수에는 넣지 않았고 개발 경로에서만 씁니다.','C3·C5'],
+    ['개발결과 및 기대효과','"연구 모델"은 공개 앱에서 쓰이나?','진단 쪽은 11/10부터 공개 앱 사진의 웜/쿨 판정에만 연구 모델을 씁니다. 밝기·선명도는 질문 5개가 정합니다. 학습 데이터가 연구 목적 조건이라 비상업 시연 범위에서 적용했고, 한국 사용자 셀카로는 아직 검증하지 않았습니다.','11/10 배포 기록'],
+    ['개발결과 및 기대효과','"앱으로 매일 쉽게 코디"는 검증했나?','기대효과입니다. 사용자·전문가 평가는 아직 하지 않았고 다음 과제 1순위입니다. 지금 숫자는 엔진 지표입니다.','논문 5.2·5.3'],
+    ['개발결과 및 기대효과','포스터의 앱 화면이 지금 앱과 같은가?','포스터를 만든 10월 화면입니다. 지금은 메뉴와 추천 화면(카드 넘기기, [오늘 이거 입기]) 등이 바뀌었습니다. 시연은 지금 공개 앱으로 보여 드립니다.','앱 변경 기록']
+  ];
+  var esc=function(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');};
+  var html='',last='',pid={'제작배경 및 목적':'p1','작품개요':'p2','내용 및 설명':'p3','개발결과 및 기대효과':'p4'};
+  QA.forEach(function(q,i){
+    if(q[0]!==last){html+='<h3 class="qgroup"><i></i>'+esc(q[0])+'</h3>';last=q[0];}
+    html+='<details class="qa"><summary><span class="qn">Q'+(i+1)+'</span><span>'+esc(q[1])+'</span><span class="hint">답 보기</span></summary><div class="ans">'+esc(q[2])+'<span class="src"><span class="where">'+esc(q[0])+'</span>근거: '+esc(q[3])+' · <a href="#'+pid[q[0]]+'" data-go="sum">포스터 정리에서 보기</a></span></div></details>';
+  });
+  document.getElementById('qaList').innerHTML=html;
+  document.querySelectorAll('[data-go="sum"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();show('sum',false);var t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'});});});
+  document.getElementById('qaOpen').addEventListener('click',function(){document.querySelectorAll('details.qa').forEach(function(d){d.open=true;});});
+  document.getElementById('qaClose').addEventListener('click',function(){document.querySelectorAll('details.qa').forEach(function(d){d.open=false;});});
+})();
+</script>
+</body>
+</html>
