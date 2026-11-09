@@ -49,6 +49,9 @@ a{color:var(--winter)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) a{color:var(--summer)}}
 :root[data-theme="dark"] a{color:var(--summer)}
 
+.tabs{display:flex;gap:4px;padding:4px;margin:16px 0 0;border-radius:999px;background:var(--chip)}
+.tabs a{flex:1;text-align:center;min-height:44px;display:flex;align-items:center;justify-content:center;border-radius:999px;text-decoration:none;color:var(--ink);font-weight:600;font-size:.95rem}
+.tabs a[aria-current="page"]{background:var(--panel);box-shadow:var(--shadow)}
 .controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .btn{font:inherit;font-size:.9rem;min-height:44px;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
 .btn:active{background:var(--chip)}
@@ -235,6 +238,11 @@ footer{margin-top:48px;font-size:.8rem;color:var(--muted)}
 </head>
 <body>
 <div class="wrap">
+
+<nav class="tabs" aria-label="페이지">
+  <a href="1min.html">1분 요약</a>
+  <a href="./" aria-current="page">전체 스토리</a>
+</nav>
 
 <header class="top">
   <div class="eyebrow">2026 SCHU AI·SW Festival 본선 대비 · 교수님 질문용</div>
