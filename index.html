@@ -182,6 +182,40 @@ ol.steps .hn{display:block;font-size:.88rem;margin-top:6px;padding:6px 10px;bord
 .swap .o::before{content:"✓ 이렇게";display:block;font-size:.72rem;color:var(--good);font-weight:700}
 .answer{font-size:1.05rem;font-weight:650;line-height:1.7;padding:16px 18px;border-radius:18px;background:linear-gradient(120deg,color-mix(in srgb,var(--spring) 15%,var(--panel)),color-mix(in srgb,var(--summer) 15%,var(--panel)));border:1px solid var(--line)}
 
+/* 12유형 */
+.split{display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:4px;font-size:.85rem;margin:8px 0}
+.split div{padding:6px 6px;border-radius:8px;background:var(--chip);text-align:center;line-height:1.3}
+.split .fh{background:transparent;font-weight:700;text-align:left;padding-left:0}
+.split .hd{background:transparent;color:var(--muted);font-size:.75rem}
+.ring{display:block;width:100%;max-width:400px;margin:4px auto}
+.ring text{font-family:inherit}
+.fam{margin:14px 0 4px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.fam b{font-size:1rem}
+.fam span{font-size:.82rem;color:var(--muted)}
+details.season{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin:6px 0;overflow:hidden}
+details.season>summary{list-style:none;cursor:pointer;padding:10px 12px;min-height:48px}
+details.season>summary::-webkit-details-marker{display:none}
+.sline{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 8px}
+.sline b{font-size:.98rem}
+.sline .en{order:3;flex-basis:100%;font-size:.75rem;color:var(--muted)}
+.sline .tg{margin-left:auto;font-size:.75rem;color:var(--muted);white-space:nowrap}
+.sline .tg::after{content:" ▾"}
+details.season[open] .sline .tg::after{content:" ▴"}
+.strip{display:flex;height:16px;border-radius:6px;overflow:hidden;margin:6px 0 4px;border:1px solid var(--line)}
+.strip i{flex:1}
+.sone{font-size:.88rem;color:var(--muted)}
+.sbody{padding:0 12px 12px;font-size:.93rem}
+.sbody dl{margin:6px 0;display:grid;grid-template-columns:auto 1fr;gap:4px 10px}
+.sbody dt{font-weight:700;font-size:.8rem;padding-top:2px}
+.sbody dd{margin:0}
+.axes{display:grid;gap:6px;margin:8px 0}
+.ax{display:grid;grid-template-columns:3.6em 1fr;gap:8px;align-items:center;font-size:.78rem;color:var(--muted)}
+.ax .t{position:relative;height:10px;border-radius:5px;background:var(--chip)}
+.ax .t::before{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--line)}
+.ax .t i{position:absolute;top:0;bottom:0;border-radius:5px;background:var(--c)}
+.ax .ends{grid-column:2;display:flex;justify-content:space-between;font-size:.68rem;margin-top:-4px}
+.nb{display:inline-block;font-size:.78rem;padding:2px 8px;border-radius:999px;background:var(--chip);margin:2px 4px 0 0}
+
 /* 예상 질문 */
 .qgroup{margin:20px 0 6px;font-size:1rem}
 details.qa{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin:8px 0}
@@ -215,7 +249,7 @@ footer{margin-top:48px;font-size:.8rem;color:var(--muted)}
 </header>
 
 <nav class="toc" aria-label="목차">
-  <a href="#s0">2분 대본</a><a href="#s1">이야기 지도</a><a href="#s2">장면 11개</a><a href="#s3">모델·데이터</a><a href="#s3m">평가 지표</a><a href="#s4">옷 넣기</a><a href="#s5">추천</a><a href="#s6">선행 연구 53%?</a><a href="#s6b">논문의 한계 서술</a><a href="#s7">말 바꾸기</a><a href="#s8">예상 질문</a>
+  <a href="#s0">2분 대본</a><a href="#s1">이야기 지도</a><a href="#twelve">퍼컬 12유형</a><a href="#s2">장면 11개</a><a href="#s3">모델·데이터</a><a href="#s3m">평가 지표</a><a href="#s4">옷 넣기</a><a href="#s5">추천</a><a href="#s6">선행 연구 53%?</a><a href="#s6b">논문의 한계 서술</a><a href="#s7">말 바꾸기</a><a href="#s8">예상 질문</a>
 </nav>
 
 <!-- 0 -->
@@ -262,6 +296,42 @@ footer{margin-top:48px;font-size:.8rem;color:var(--muted)}
     <div class="blk"><span class="tag t1">무슨 일</span><p>학교 축제에서 "여름 쿨톤"을 받았다. 손에 남은 건 색 견본뿐. 옷장 앞에서 내 옷 중 어느 게 그 색인지, 오늘 뭘 입을지 몰랐다.</p></div>
     <div class="blk"><span class="tag t2">그래서</span><p>"퍼스널컬러를 알아도 옷과 연결하지 못한다"를 문제로 잡았다.</p></div>
     <div class="blk"><span class="tag t3">왜 문제인가</span><p>진단은 색 이름으로 끝나고 매일 하는 선택과 이어지지 않는다. 진단 서비스는 많지만 "내가 가진 옷"으로 이어 주는 건 드물었다.</p></div>
+    <div class="blk" id="twelve"><span class="tag t1">12유형 한눈에</span>
+      <p>축제에서 받은 "여름 쿨톤"은 4계절 단위다. 앱은 그보다 한 단계 더 나눈 <b>12유형</b>으로 팔레트를 정한다. 같은 여름 쿨이어도 라이트·트루·뮤트는 어울리는 옷 색이 다르기 때문이다.</p>
+      <h4 style="margin:10px 0 4px">어떻게 12개가 되나</h4>
+      <p style="margin-bottom:4px">① 온도로 <b>웜(봄·가을) / 쿨(여름·겨울)</b> → ② 분위기로 4계절 → ③ 각 계절을 <b>가장 두드러진 특징</b> 하나로 다시 셋.</p>
+      <div class="split" aria-label="계절별 세부 유형 표">
+        <div class="hd"></div><div class="hd">이웃 쪽 ①</div><div class="hd">중심(트루)</div><div class="hd">이웃 쪽 ②</div>
+        <div class="fh" style="color:var(--spring)">봄 웜</div><div>브라이트<br><small>선명</small></div><div>트루</div><div>라이트<br><small>밝음</small></div>
+        <div class="fh" style="color:var(--summer)">여름 쿨</div><div>라이트<br><small>밝음</small></div><div>트루</div><div>뮤트<br><small>부드러움</small></div>
+        <div class="fh" style="color:var(--autumn)">가을 웜</div><div>뮤트<br><small>부드러움</small></div><div>스트롱</div><div>딥<br><small>깊음</small></div>
+        <div class="fh" style="color:var(--winter)">겨울 쿨</div><div>딥<br><small>깊음</small></div><div>트루</div><div>브라이트<br><small>선명</small></div>
+      </div>
+      <ul style="margin:6px 0 0;padding-left:20px;font-size:.93rem">
+        <li><b>라이트</b> = 밝고 가벼움 · <b>브라이트</b> = 맑고 선명함 · <b>뮤트</b> = 회색이 섞인 듯 부드러움 · <b>딥</b> = 어둡고 깊음</li>
+        <li><b>트루</b>(가을은 한국식으로 <b>스트롱</b>) = 그 계절의 온도가 가장 뚜렷한 중심형</li>
+        <li>양 끝 유형은 <b>옆 계절과 특징을 나눈다</b>. 그래서 12유형은 닫힌 상자가 아니라 원처럼 이어진다(아래 지도).</li>
+      </ul>
+      <svg class="ring" id="ringSvg" viewBox="0 0 360 360" role="img" aria-label="12유형 원형 지도: 봄 브라이트, 봄 트루, 봄 라이트, 여름 라이트, 여름 트루, 여름 뮤트, 가을 뮤트, 가을 스트롱, 가을 딥, 겨울 딥, 겨울 트루, 겨울 브라이트 순으로 이어지고, 봄 라이트와 여름 라이트는 밝음, 여름 뮤트와 가을 뮤트는 부드러움, 가을 딥과 겨울 딥은 깊음, 겨울 브라이트와 봄 브라이트는 선명함을 나눈다"></svg>
+      <p class="small" style="text-align:center;margin-top:0">점 색 = 그 유형의 대표색 하나. 원 안 글자 = 이웃한 두 유형이 함께 가진 특징.</p>
+      <div id="seasonCards"></div>
+      <div class="callout warn" style="margin-top:12px"><span class="t">20초로 설명하기</span>"퍼스널컬러는 먼저 따뜻한지 차가운지로 웜·쿨을 나누고, 밝기·선명도·깊이 분위기로 봄·여름·가을·겨울 넷이 됩니다. 각 계절을 가장 두드러진 특징으로 다시 셋으로 나눠 12유형이고, 옆 계절과 특징을 나눠서 원처럼 이어집니다. 저는 축제에서 '여름 쿨'까지만 받았는데, 옷을 고르려면 그 안에서 라이트인지 뮤트인지까지 알아야 했습니다."</div>
+      <p class="small" style="margin:8px 0 0">유형 이름·대표 9색·어울리는/피할 색·이웃 유형은 앱 화면과 같은 데이터(<code>seasonContent.ts</code>, <code>seasonDisplay.ts</code>, <code>wardrobeConstants.ts</code>)에서 가져왔다. 막대 4개는 화면 표시용 설계값이지 측정값이 아니다.</p>
+    </div>
+    <details class="deep"><summary><span class="ic">원</span>원리 더 깊이: 12유형은 앱에서 어떻게 쓰이나<span class="cnt">4개</span></summary><div>
+      <h4>12유형은 앱 어디에 쓰이나?</h4>
+      <ul>
+        <li>결과 화면: 유형 이름, 대표 9색 띠, 이웃 유형(세컨드 시즌 한 줄)</li>
+        <li>옷 점수: 옷 대표색과 <b>그 유형 팔레트 색</b> 사이의 CIEDE2000 거리 → 찰떡 88 · 잘 맞음 74 · 무난 58 등급(K17)</li>
+        <li>피할 색: 유형별 피할 색과 아주 가까운 옷은 감점(K17)</li>
+      </ul>
+      <h4>결과지 이름이 진단처마다 다르면?</h4>
+      <p>직접 고르기 화면에 이렇게 안내한다: "뮤트 = 소프트, 딥 = 다크, 브라이트 = 비비드·클리어, 가을 스트롱 = 가을 트루. 계절만 받았다면(예: 가을웜) 가운데 유형(트루·스트롱)을 고르세요." 영어 이름은 카드의 회색 글자.</p>
+      <h4>"세컨드 시즌"은 무엇인가?</h4>
+      <p>1·2위 유형 점수가 가까울 때만 두 번째 유형을 한 줄로 같이 보여 준다. 12유형이 원처럼 이어져 있어서, 경계에 있는 사람은 이웃 유형의 색 일부를 함께 쓸 수 있다는 생각이다.</p>
+      <h4>연구 모델은 12유형을 바로 맞히나?</h4>
+      <p>아니다. 연구 모델의 주 출력은 4계절이고, 12유형은 계열 안 세부 유형을 따로 판정해 확장했다. 공식 시험에서 12유형 정확도는 26.89%로 우연(8.3%)의 3.2배라 약하다(T17·Z7). 그래서 세부 유형은 설문·직접 고르기의 역할이 크다.</p>
+    </div></details>
     <details class="deep"><summary><span class="ic">원</span>원리 더 깊이: 퍼스널컬러는 무엇을 보나<span class="cnt">3개</span></summary><div>
       <h4>"어울린다"는 건 무슨 뜻인가?</h4>
       <p>색은 옆에 어떤 색이 오느냐에 따라 다르게 보인다(동시 대비). 얼굴 바로 옆에 어떤 천이 오느냐에 따라 피부가 맑아 보이기도, 칙칙해 보이기도 한다. 드레이핑 진단은 이 현상을 이용한다.</p>
@@ -879,6 +949,55 @@ footer{margin-top:48px;font-size:.8rem;color:var(--muted)}
   }
   document.querySelectorAll('.seg button').forEach(function(b){b.addEventListener('click',function(){draw(+b.getAttribute('data-m'));});});
   draw(0);
+
+  // 12유형 (앱 seasonContent.ts·seasonDisplay.ts·wardrobeConstants.ts 데이터)
+  var FAM={spring:['봄 웜','따뜻하고 밝으며 생기 있는 웜톤','var(--spring)'],summer:['여름 쿨','차갑고 부드러운 저채도 쿨톤','var(--summer)'],autumn:['가을 웜','따뜻하고 깊으며 안정적인 웜톤','var(--autumn)'],winter:['겨울 쿨','차갑고 선명하며 대비가 강한 쿨톤','var(--winter)']};
+  // [id, 이름, 영어, 계열, 한 줄, 어울리는 색, 피할 색, 이웃, 축(온도·밝기·선명도·대비), 대표 9색]
+  var SZ=[
+    ['bright-spring','봄웜 브라이트','Bright · Clear Spring','spring','봄 중 채도·선명도가 높은 축. 밝은 바탕 위에 또렷한 색이 산다','선명한 코랄, 비비드 핑크, 맑은 옐로, 청량한 그린','회색기 많은 색, 탁한 로즈브라운',['봄웜 트루','겨울쿨 브라이트'],[0.92,0.32,1,0.7],['#FFF5E1','#FFB38A','#00D7C9','#F2D0A7','#C89150','#00B6C7','#FF4F8B','#FFD200','#4FB6FF']],
+    ['true-spring','봄웜 트루','True · Warm Spring','spring','전형적인 봄 웜의 중심. 따뜻하고 생기 있는 색','코랄, 오렌지, 골든 옐로, 싱그러운 그린','차가운 블루, 메탈릭 실버, 회보라',['봄웜 라이트','봄웜 브라이트'],[1,0.35,0.62,0.15],['#FFF0C2','#FFA56B','#4CD9D0','#E5C18C','#C99B63','#1C8B8F','#F96822','#FFE04B','#53B84A']],
+    ['light-spring','봄웜 라이트','Light Spring','spring','봄 중 가장 밝고 가벼운 축. 공기가 느껴지는 밝은 톤','밝은 피치, 라이트 코랄, 맑은 민트, 연한 옐로','너무 검거나 무거운 색, 깊은 와인·다크 그린',['봄웜 트루','여름쿨 라이트'],[0.72,0.92,0.45,-0.2],['#FFF6D9','#FFD1B8','#AFE9E4','#FDF1D0','#D9C2A2','#F2B577','#FF8F70','#FFE68A','#73D7D3']],
+    ['light-summer','여름쿨 라이트','Light Summer','summer','여름 중 밝기 축. 옅고 부드러운 쿨톤','쿨 핑크, 라일락, 파우더 블루, 소프트 민트','강한 오렌지, 깊은 브라운, 카키',['봄웜 라이트','여름쿨 트루'],[-0.74,0.95,-0.2,-0.35],['#F8F6F3','#F4D7E4','#C7D4F6','#F2ECE8','#C7B8B1','#AAB6C9','#E6A8B8','#B8E5E8','#8FA9D5']],
+    ['true-summer','여름쿨 트루','True · Cool Summer','summer','전형적인 여름 쿨의 중심. 차갑고 부드러운 중간 밝기','로즈, 모브, 페일 블루, 쿨 그레이','강한 골드, 카멜, 올리브',['여름쿨 라이트','여름쿨 뮤트'],[-1,0.28,-0.58,0.12],['#F7F4F2','#D8A2B3','#8399C8','#E9E1DC','#9E8F88','#3E4E73','#A54361','#4E7F87','#9A87BF']],
+    ['soft-summer','여름쿨 뮤트','Soft Summer','summer','저채도가 강한 여름. 회색 한 방울 섞인 듯한 쿨 컬러','더스티 로즈, 그레이시 블루, 소프트 모브, 토프','아주 선명한 원색, 형광에 가까운 색',['여름쿨 트루','가을웜 뮤트'],[-0.62,0.2,-1,-0.38],['#F3EDEB','#C89FA4','#9AA7C7','#D9CDC6','#8A7F7A','#6B7077','#8C6572','#6D9793','#A693AE']],
+    ['soft-autumn','가을웜 뮤트','Soft Autumn','autumn','가을 중 가장 부드럽고 온도가 낮은 축. 누그러진 자연색','베이지, 더스티 코랄, 세이지, 소프트 카키','차갑고 맑은 파스텔, 네온에 가까운 색',['여름쿨 뮤트','가을웜 스트롱'],[0.62,0.08,-0.55,-0.05],['#F2E5D3','#E8C1A0','#7FA9A6','#DDD0BC','#A18E77','#5E6B4E','#C67B62','#A9B08C','#5E8C8A']],
+    ['true-autumn','가을웜 스트롱','True · Warm Autumn','autumn','전형적인 가을 웜의 중심. 흙빛·나무빛의 따뜻하고 깊은 색','머스터드, 올리브, 테라코타, 브라운','차갑고 가벼운 실버, 라벤더, 파스텔 블루',['가을웜 뮤트','가을웜 딥'],[0.96,-0.25,0.12,0.18],['#F6E7BF','#D9742A','#0F6B62','#C69C6D','#5E3E2B','#42552D','#B7462F','#D9A404','#006D6F']],
+    ['dark-autumn','가을웜 딥','Dark · Deep Autumn','autumn','가을 중 명도가 낮고 깊이가 강한 축. 무게감 있는 색','딥 브라운, 다크 카키, 번트 오렌지, 와인 브라운','지나치게 밝고 차가운 파스텔',['가을웜 스트롱','겨울쿨 딥'],[0.76,-0.9,-0.18,0.35],['#EEE1C7','#B88A61','#204D57','#7A5A3A','#3E2A1F','#323728','#B54C28','#596126','#4B314C']],
+    ['dark-winter','겨울쿨 딥','Dark · Deep Winter','winter','겨울 중 어둡고 대비가 큰 축. 차갑고 깊은 색','블랙, 다크 버건디, 딥 퍼플, 네이비','흐릿하고 따뜻한 파스텔',['가을웜 딥','겨울쿨 트루'],[-0.88,-0.55,0.35,0.78],['#F5F7FA','#6D2240','#0F4C81','#DDE5EE','#2E323A','#111111','#B0006D','#007A6C','#5B3E87']],
+    ['true-winter','겨울쿨 트루','True · Cool Winter','winter','전형적인 겨울 쿨의 중심. 차갑고 선명한 흑백 대비','블랙, 화이트, 코발트 블루, 푸시아, 아이스 핑크','카멜, 골드, 올리브',['겨울쿨 딥','겨울쿨 브라이트'],[-1,0.05,0.72,0.95],['#FFFFFF','#C11F6A','#0047AB','#C9CED6','#434A54','#000000','#FF1493','#007F5F','#6E2D91']],
+    ['bright-winter','겨울쿨 브라이트','Bright · Clear Winter','winter','겨울 중 채도·대비가 가장 높은 축. 아주 선명한 차가운 색','비비드 핑크, 선명한 블루, 쿨 그린, 퓨어 화이트','탁한 로즈브라운, 베이지, 흐린 블루그레이',['겨울쿨 트루','봄웜 브라이트'],[-0.72,0.22,1,1],['#FFFFFF','#FF2F92','#2458FF','#D0D7E2','#3C4655','#000000','#B7FF00','#00D4D8','#7A3DF0']]
+  ];
+  var AXN=[['온도','쿨','웜'],['밝기','어두움','밝음'],['선명도','부드러움','선명'],['대비','낮음','높음']];
+  function axBar(v,c){var l=v>=0?50:50+v*50,w=Math.abs(v)*50;return '<div class="t" style="--c:'+c+'"><i style="left:'+l+'%;width:'+w+'%"></i></div>';}
+  var famOrder=['spring','summer','autumn','winter'],cardHtml='';
+  famOrder.forEach(function(f){
+    cardHtml+='<div class="fam"><b style="color:'+FAM[f][2]+'">'+FAM[f][0]+'</b><span>'+FAM[f][1]+'</span></div>';
+    SZ.filter(function(s){return s[3]===f;}).forEach(function(s){
+      var strip=s[9].map(function(h){return '<i style="background:'+h+'"></i>';}).join('');
+      var axes=AXN.map(function(a,i){return '<div class="ax"><span>'+a[0]+'</span>'+axBar(s[8][i],FAM[f][2])+'<div class="ends"><span>'+a[1]+'</span><span>'+a[2]+'</span></div></div>';}).join('');
+      cardHtml+='<details class="season" id="sz-'+s[0]+'"><summary><div class="sline"><b>'+s[1]+'</b><span class="en">'+s[2]+'</span><span class="tg">더 보기</span></div><div class="strip">'+strip+'</div><div class="sone">'+s[4]+'</div></summary><div class="sbody"><dl><dt style="color:var(--good)">어울림</dt><dd>'+s[5]+'</dd><dt style="color:var(--bad)">피할 색</dt><dd>'+s[6]+'</dd></dl><div class="axes">'+axes+'</div><div class="small">이웃 유형</div>'+s[7].map(function(n){return '<span class="nb">'+n+'</span>';}).join('')+'</div></details>';
+    });
+  });
+  document.getElementById('seasonCards').innerHTML=cardHtml;
+  // 원형 지도: 봄 브라이트부터 시계 방향
+  (function(){
+    var svg=document.getElementById('ringSvg'),cx=180,cy=180,r=100,out='';
+    // 색은 CSS 변수로 칠해 다크/라이트가 바뀌어도 따라가게 한다
+    out+='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" style="fill:none;stroke:var(--line)" stroke-width="2"/>';
+    var shared=[[0,'밝음'],[90,'부드러움'],[180,'깊음'],[270,'선명']];
+    shared.forEach(function(s){var a=s[0]*Math.PI/180,x=cx+76*Math.cos(a),y=cy+76*Math.sin(a);out+='<text x="'+x.toFixed(1)+'" y="'+(y+4).toFixed(1)+'" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--muted)">'+s[1]+'</text>';});
+    var famC=[[-45,'spring'],[45,'summer'],[135,'autumn'],[225,'winter']];
+    famC.forEach(function(fc){var a=fc[0]*Math.PI/180,x=cx+40*Math.cos(a),y=cy+40*Math.sin(a);out+='<text x="'+x.toFixed(1)+'" y="'+(y+4).toFixed(1)+'" text-anchor="middle" font-size="12" font-weight="800" style="fill:'+FAM[fc[1]][2]+'">'+FAM[fc[1]][0]+'</text>';});
+    SZ.forEach(function(s,i){
+      var deg=-75+30*i,a=deg*Math.PI/180,x=cx+r*Math.cos(a),y=cy+r*Math.sin(a);
+      var lx=cx+124*Math.cos(a),ly=cy+124*Math.sin(a),anc=Math.abs(Math.cos(a))<0.3?'middle':(Math.cos(a)>0?'start':'end');
+      var sub=s[1].split(' ')[1];
+      out+='<a href="#sz-'+s[0]+'"><circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="11" style="fill:'+s[9][1]+';stroke:'+FAM[s[3]][2]+'" stroke-width="3"/>';
+      out+='<text x="'+lx.toFixed(1)+'" y="'+(ly+4).toFixed(1)+'" text-anchor="'+anc+'" font-size="12" font-weight="600" style="fill:var(--ink)">'+sub+'</text></a>';
+    });
+    svg.innerHTML=out;
+    svg.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){var d=document.querySelector(a.getAttribute('href'));if(d)d.open=true;});});
+  })();
 
   // 예상 질문: [묶음, 질문, 답, 근거, 이야기 위치]
   var QA=[
