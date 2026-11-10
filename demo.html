@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#f6f2ec" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#171614" media="(prefers-color-scheme: dark)">
+<title>ColorFit 시연</title>
+<style>
+:root{
+  --bg:#f6f2ec; --panel:#fff; --ink:#1f1d1b; --muted:#6b645c; --line:#e4ddd3;
+  --spring:#e5825d; --summer:#7f90d2; --autumn:#b0612a; --winter:#2f3e78;
+  --warm:#c0622b; --cool:#3f5bb5;
+  --good:#2f8a5b; --good-bg:#e5f3ea; --bad:#c2453b; --bad-bg:#f9e4e1; --warn:#8f6200; --warn-bg:#fbf0d6;
+  --deep:#f2eee8; --chip:#efe9e1; --shadow:0 1px 2px #0000000d,0 4px 14px #0000000a;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#171614; --panel:#23211e; --ink:#eeeae4; --muted:#a59d93; --line:#3a3631;
+    --warm:#e08a55; --cool:#8ea2ef;
+    --good:#5cc08a; --good-bg:#1d3327; --bad:#ec7b70; --bad-bg:#3a2220; --warn:#e2b552; --warn-bg:#3a3020;
+    --deep:#1c1b19; --chip:#2e2b27; --summer:#a7b3ea; --winter:#8e9be0; --autumn:#d98c52; --shadow:0 1px 2px #00000040;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#171614; --panel:#23211e; --ink:#eeeae4; --muted:#a59d93; --line:#3a3631;
+  --warm:#e08a55; --cool:#8ea2ef;
+  --good:#5cc08a; --good-bg:#1d3327; --bad:#ec7b70; --bad-bg:#3a2220; --warn:#e2b552; --warn-bg:#3a3020;
+  --deep:#1c1b19; --chip:#2e2b27; --summer:#a7b3ea; --winter:#8e9be0; --autumn:#d98c52; --shadow:0 1px 2px #00000040;
+}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:1rem/1.7 "Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;word-break:keep-all;overflow-wrap:anywhere;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px calc(56px + env(safe-area-inset-bottom))}
+a{color:var(--winter)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) a{color:var(--summer)}}
+:root[data-theme="dark"] a{color:var(--summer)}
+.tabs{display:flex;gap:4px;padding:4px;margin:16px 0 0;border-radius:999px;background:var(--chip)}
+.tabs a{flex:1;text-align:center;min-height:44px;display:flex;align-items:center;justify-content:center;border-radius:999px;text-decoration:none;color:var(--ink);font-weight:600;font-size:.88rem;padding:0 4px}
+.tabs a[aria-current="page"]{background:var(--panel);box-shadow:var(--shadow)}
+header{padding:18px 0 4px}
+.eyebrow{font-size:.8rem;color:var(--muted)}
+h1{font-size:1.6rem;line-height:1.3;margin:4px 0 8px}
+h2{font-size:1.2rem;margin:0 0 6px;line-height:1.4}
+h3{font-size:1rem;margin:0 0 4px}
+p{margin:6px 0}
+.lead{color:var(--muted);font-size:.95rem;margin:0}
+.small{font-size:.8rem;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+.card{margin:12px 0;padding:14px;border-radius:18px;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow)}
+.seg{position:sticky;top:0;z-index:5;display:flex;gap:4px;margin:14px -16px 0;padding:8px 16px;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.seg button{flex:1;min-height:44px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;font-size:.86rem;font-weight:700;cursor:pointer;line-height:1.25;padding:4px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.pane{display:none}
+.pane.on{display:block}
+.btn,.chip{font:inherit;cursor:pointer;color:var(--ink);background:var(--panel);border:1px solid var(--line)}
+.btn{min-height:44px;padding:8px 14px;border-radius:12px;font-size:.9rem;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chip{min-height:40px;padding:6px 12px;border-radius:999px;font-size:.85rem}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chips.scrollx{flex-wrap:nowrap;overflow-x:auto;margin:8px -14px;padding:0 14px 4px;scrollbar-width:none}
+.chips.scrollx .chip{flex:none}
+.row{display:flex;gap:12px;align-items:center}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:420px){.grid2.stack{grid-template-columns:1fr}}
+.tag{display:inline-block;padding:1px 8px;border-radius:999px;font-size:.75rem;font-weight:700;background:var(--chip);color:var(--muted)}
+.tag.ok{background:var(--good-bg);color:var(--good)}
+.tag.no{background:var(--bad-bg);color:var(--bad)}
+.tag.warn{background:var(--warn-bg);color:var(--warn)}
+.honest{margin:10px 0;padding:10px 12px;border-radius:12px;background:var(--warn-bg);color:var(--ink);font-size:.85rem}
+.honest b{color:var(--warn)}
+details.deep{margin:10px 0;border:1px solid var(--line);border-radius:14px;background:var(--deep)}
+details.deep>summary{cursor:pointer;min-height:44px;display:flex;align-items:center;padding:8px 12px;font-weight:700;font-size:.92rem;list-style:none}
+details.deep>summary::-webkit-details-marker{display:none}
+details.deep>summary::before{content:"＋";margin-right:8px;color:var(--muted)}
+details.deep[open]>summary::before{content:"－"}
+details.deep>div{padding:0 14px 12px;font-size:.9rem}
+.math{font-family:ui-monospace,Consolas,monospace;font-size:.84rem;background:var(--chip);padding:8px 10px;border-radius:10px;overflow-x:auto;white-space:pre;margin:6px 0}
+
+/* ① 조명 */
+.stage{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center}
+@media (max-width:440px){.stage{grid-template-columns:120px 1fr}}
+.face{width:100%;height:auto;border-radius:16px;display:block}
+.slider{margin:6px 0}
+.slider label{display:flex;justify-content:space-between;font-size:.85rem;font-weight:600}
+.slider input{width:100%;min-height:36px;accent-color:var(--ink)}
+.ends{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-top:-6px}
+.meter{position:relative;height:14px;border-radius:7px;background:linear-gradient(90deg,var(--cool),var(--chip) 50%,var(--warm));margin:8px 0 4px}
+.meter .mid{position:absolute;left:50%;top:-3px;bottom:-3px;width:2px;background:var(--ink);opacity:.35}
+.meter .dot{position:absolute;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:var(--panel);border:3px solid var(--ink);transition:left .15s}
+.verdict{font-size:1.15rem;font-weight:800}
+.verdict.w{color:var(--warm)}
+.verdict.c{color:var(--cool)}
+.fam{display:grid;grid-template-columns:auto 1fr auto;gap:2px 8px;font-size:.78rem;align-items:center;margin-top:6px}
+.fam i{display:block;height:8px;border-radius:4px;background:var(--muted)}
+.sweep{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:6px}
+.sweep th,.sweep td{padding:6px 4px;border-bottom:1px solid var(--line);text-align:center}
+.sweep th:first-child,.sweep td:first-child{text-align:left}
+.sweep tfoot td{font-weight:800}
+.ft{width:100%;border-collapse:collapse;font-size:.78rem}
+.ft td{padding:5px 4px;border-bottom:1px solid var(--line)}
+.ft td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.sw{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;border:1px solid #0002}
+
+/* ② 옷 */
+.thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+@media (max-width:440px){.thumbs{grid-template-columns:repeat(5,1fr);gap:4px}}
+.thumb{position:relative;padding:4px;border-radius:12px;border:2px solid transparent;background:var(--panel);cursor:pointer;min-height:44px}
+.thumb img{width:100%;aspect-ratio:1;object-fit:contain;display:block}
+.thumb[aria-pressed="true"]{border-color:var(--ink)}
+.thumb .q{position:absolute;top:2px;right:2px;font-size:.62rem;font-weight:800;background:var(--warn-bg);color:var(--warn);border-radius:6px;padding:0 4px}
+.detail{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:start}
+.detail img{width:100%;aspect-ratio:1;object-fit:contain;background:var(--deep);border-radius:12px}
+canvas.vec{width:100%;height:auto;border-radius:8px;display:block;image-rendering:pixelated}
+.bars{display:grid;grid-template-columns:minmax(0,1.3fr) 2fr auto;gap:4px 8px;align-items:center;font-size:.8rem;margin-top:6px}
+.bars i{display:block;height:10px;border-radius:5px;background:var(--summer)}
+.bars i.top{background:var(--winter)}
+.bars .lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dom{display:flex;height:22px;border-radius:8px;overflow:hidden;margin-top:4px;border:1px solid var(--line)}
+
+/* ③ 코디 */
+select{font:inherit;min-height:44px;padding:6px 10px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);width:100%}
+.ctl{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+@media (max-width:440px){.ctl{grid-template-columns:1fr 1fr}.ctl .full{grid-column:1/-1}}
+.ctl label{font-size:.78rem;color:var(--muted);font-weight:600}
+.palette{display:flex;flex-wrap:wrap;gap:3px;margin-top:6px}
+.palette span{width:18px;height:18px;border-radius:5px}
+.ward{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.wi{position:relative;padding:4px 2px 6px;border-radius:12px;border:1px solid var(--line);background:var(--panel);text-align:center;cursor:pointer;font:inherit;color:var(--ink);min-height:44px}
+.wi img{width:100%;aspect-ratio:1;object-fit:contain;display:block}
+.wi .s{display:block;font-size:.8rem;font-weight:800}
+.wi .t{display:block;font-size:.66rem;color:var(--muted);line-height:1.2}
+.wi.off{opacity:.35}
+.wi.cold{outline:2px dashed var(--bad);outline-offset:-2px}
+.funnel{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.85rem;margin:6px 0}
+.funnel b{font-size:1.05rem}
+.outfit{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;padding:10px;border-radius:16px;border:1px solid var(--line);background:var(--panel);margin:8px 0}
+.outfit .imgs{display:flex;gap:2px}
+.outfit .imgs img{width:58px;height:58px;object-fit:contain;background:var(--deep);border-radius:10px}
+@media (max-width:400px){.outfit{grid-template-columns:1fr}.outfit .imgs img{width:64px;height:64px}}
+.rank{font-weight:800;font-size:.8rem;color:var(--muted)}
+.score{font-size:1.4rem;font-weight:800}
+.axes{display:grid;grid-template-columns:4.6em 1fr 2.4em;gap:2px 6px;align-items:center;font-size:.74rem;margin-top:4px}
+.axes i{display:block;height:8px;border-radius:4px}
+.toggle{display:flex;align-items:center;gap:10px;min-height:44px;font-weight:700;cursor:pointer}
+.toggle input{width:22px;height:22px;accent-color:var(--ink)}
+.moved{font-size:.75rem;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="tabs" aria-label="자료 탭">
+  <a href="1min.html">1분 요약</a><a href="poster.html">포스터</a><a href="demo.html" aria-current="page">시연</a><a href="./">스토리</a>
+</nav>
+<header>
+  <div class="eyebrow">2026 SCHU AI·SW 페스티벌 · ColorFit</div>
+  <h1>직접 돌려 보는 시연</h1>
+  <p class="lead">앱 코드와 모델 숫자를 그대로 묶어 이 폰에서 계산해요. 사진은 받지 않아요.</p>
+</header>
+
+<div class="seg" role="group" aria-label="시연 고르기">
+  <button type="button" data-pane="p1" aria-pressed="true">① 조명<br>바꿔 보기</button>
+  <button type="button" data-pane="p2" aria-pressed="false">② 옷 알아보기<br>(벡터)</button>
+  <button type="button" data-pane="p3" aria-pressed="false">③ 코디<br>짜기</button>
+</div>
+
+<!-- ① 조명 -->
+<section class="pane on" id="p1">
+  <div class="card">
+    <h2>조명이 바뀌어도 웜/쿨이 버티나?</h2>
+    <p class="small">같은 얼굴에 조명만 바꿔요. 왼쪽은 예전 앱 규칙, 오른쪽은 지금 공개 앱이 쓰는 연구 모델(Hybrid 12)이에요.</p>
+    <div class="chips" id="facePick" role="group" aria-label="예시 얼굴"></div>
+    <div class="stage">
+      <svg class="face" id="faceSvg" viewBox="0 0 150 170" role="img" aria-label="조명을 받은 예시 얼굴">
+        <rect id="fBg" x="0" y="0" width="150" height="170" rx="16"/>
+        <ellipse id="fHairBack" cx="75" cy="78" rx="56" ry="64"/>
+        <rect id="fNeck" x="60" y="118" width="30" height="34" rx="8"/>
+        <ellipse id="fSkin" cx="75" cy="84" rx="42" ry="50"/>
+        <path id="fHairTop" d="M30 74 C30 30 120 30 120 74 C108 52 92 46 75 46 C58 46 42 52 30 74 Z"/>
+        <ellipse cx="58" cy="86" rx="9" ry="6" fill="#fff"/><ellipse cx="92" cy="86" rx="9" ry="6" fill="#fff"/>
+        <circle id="fEyeL" cx="58" cy="86" r="4.6"/><circle id="fEyeR" cx="92" cy="86" r="4.6"/>
+        <path id="fLips" d="M62 112 Q75 104 88 112 Q75 122 62 112 Z"/>
+      </svg>
+      <div>
+        <div class="slider"><label for="tint">조명 색 <span id="tintV" class="num"></span></label>
+          <input id="tint" type="range" min="-100" max="100" step="5" value="0"><div class="ends"><span>파란 형광등·흐림</span><span>노란 전구</span></div></div>
+        <div class="slider"><label for="bright">밝기 <span id="brightV" class="num"></span></label>
+          <input id="bright" type="range" min="40" max="160" step="5" value="100"><div class="ends"><span>어둡게</span><span>밝게</span></div></div>
+      </div>
+    </div>
+    <div class="chips scrollx" id="lightPick" role="group" aria-label="조명 빠르게 고르기"></div>
+    <div class="grid2 stack" style="margin-top:8px">
+      <div class="card" style="margin:0">
+        <h3>예전 규칙</h3>
+        <div class="small">피부·입술·머리·눈의 노란 정도(Lab b*) 절대값</div>
+        <div class="meter" aria-hidden="true"><span class="mid"></span><span class="dot" id="ruleDot"></span></div>
+        <div class="row" style="justify-content:space-between"><span class="verdict" id="ruleV"></span><span id="ruleTag"></span></div>
+        <div class="small num" id="ruleN"></div>
+      </div>
+      <div class="card" style="margin:0">
+        <h3>Hybrid 12 (연구 모델)</h3>
+        <div class="small">밝기 6개 + 부위 사이 색 차이 6개 → 4계절 확률</div>
+        <div class="meter" aria-hidden="true"><span class="mid"></span><span class="dot" id="hybDot"></span></div>
+        <div class="row" style="justify-content:space-between"><span class="verdict" id="hybV"></span><span id="hybTag"></span></div>
+        <div class="fam num" id="hybFam"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>조명 8가지로 흔들어 보기</h3>
+    <p class="small">기본 조명의 판정과 달라지면 ✗예요. 이 얼굴 하나로 그 자리에서 다시 계산해요. "움직인 폭"은 각 눈금 전체(규칙 −1~1, 확률 0~100%) 대비예요.</p>
+    <table class="sweep num" id="sweep"></table>
+    <p class="small">예전 규칙은 거의 늘 "웜"이라(합성 얼굴 13,860종 검사에서 쿨 0%) ✓가 많아도 지수 자체는 크게 흔들려요. Hybrid는 조명 색에는 거의 안 움직이고, 밝기가 크게 바뀌면 움직여요(밝기 특징 6개 때문, 아래 원리 참고).</p>
+    <div class="honest"><b>논문 수치</b> 학습에 안 쓴 형광등·흐린 조명 4종에서 판정이 바뀐 비율 <b>39.87% → 11.91%</b>(Lab 절대값 모델 대비). 대신 정확도는 3.85%p 내려갔어요. 이 표는 예시 얼굴 하나로 하는 간이 시연이고, 논문 수치와 같은 실험은 아니에요.</div>
+  </div>
+
+  <details class="deep"><summary>12개 특징 직접 보기</summary><div>
+    <p class="small">기본 조명 값 → 지금 값. 색 차이 6개는 조명 색을 바꿔도 그대로예요(밝게 해서 255에서 잘리면 조금 달라져요).</p>
+    <table class="ft" id="ftab"></table>
+  </div></details>
+  <details class="deep"><summary>원리: 왜 "부위 사이 차이"는 조명에 안 흔들리나</summary><div>
+    <p>카메라에 찍힌 색은 대략 <b>사람 색 × 조명 색</b>이에요. 노란 전구는 빨강 채널을 키우고 파랑을 줄여요(채널마다 곱하기).</p>
+    <div class="math">피부 R/G = (r_피부 × a) / (g_피부 × b)
+ln(피부 R/G) = ln(r_피부/g_피부) + ln(a/b)
+ln(머리 R/G) = ln(r_머리/g_머리) + ln(a/b)
+차이 = ln(r_피부/g_피부) − ln(r_머리/g_머리)   ← 조명 ln(a/b)가 빠져요</div>
+    <p>같은 사진 안의 피부·머리·눈은 같은 조명을 받으니, 로그 비를 서로 빼면 조명 몫이 사라져요. 이 6개에 밝기 L* 6개를 더한 것이 Hybrid 12예요. 학습 때 흰 균형(WB)을 일부러 흔든 사진도 넣었어요(6종 학습, 4종은 평가에만).</p>
+    <p><b>한계도 그대로 보여요.</b> 밝기 L* 6개는 조명 세기에 따라 변해서, 아주 어둡게 하면 Hybrid도 움직여요. 진짜 조명은 곱하기 하나가 아니라 그림자·섞인 빛도 있어요. 실제로 다시 찍은 사진(SoF)에서는 효과를 확인하지 못했어요.</p>
+    <p class="small">예시 얼굴은 색 견본으로 만든 가상 입력이에요(실제 사진 아님). 흩어짐(std) 3개는 고정값을 밝기에 맞춰 근사했어요. 모델 숫자는 앱의 hybrid12Model.json(hybrid-L-aug-fullfit) 그대로예요.</p>
+  </div></details>
+</section>
+
+<!-- ② 옷 -->
+<section class="pane" id="p2">
+  <div class="card">
+    <h2>사진 한 장 → 숫자 768개 → 종류</h2>
+    <p class="small">FashionSigLIP(q4, 61MB)을 실제로 돌려 얻은 값이에요. 옷을 눌러 보세요. <span class="tag warn">?</span>는 애매해서 앱이 두 개 중 고르게 하는 옷이에요.</p>
+    <div class="thumbs" id="thumbs" role="group" aria-label="예시 옷"></div>
+  </div>
+  <div class="card" id="itemCard"></div>
+  <details class="deep"><summary>원리: 사진과 글을 같은 공간에 놓는 모델</summary><div>
+    <p>SigLIP은 사진과 글을 같은 768차원 공간의 점으로 바꾸고, 맞는 사진-글 짝은 가깝게·틀린 짝은 멀게 학습한 모델이에요. FashionSigLIP(Marqo)은 이걸 패션 상품으로 더 학습한 것이에요.</p>
+    <div class="math">점수 = 사진 벡터 · 문구 벡터   (둘 다 길이 1 → 코사인)
+종류 점수 = 그 종류 문구들 중 최고점
+1등 − 2등 &lt; 0.0145 이거나 대분류가 다르면 → 두 개 중 고르기</div>
+    <p>정답 라벨을 붙인 한국 옷 사진이 없어서 새로 학습하지 않고, 영어 문구 95개(종류 52종 + 소매 문구)와 비교하는 방식(zero-shot)을 썼어요. 문구만 바꾸면 종류를 늘릴 수 있어요. 소매는 "short sleeves"와 "long sleeves" 점수 차로 반팔/긴팔을 나눠요.</p>
+    <p>모델을 4비트로 줄여 폰 브라우저 안에서 돌려요. 사진은 서버로 가지 않아요. 색은 이 모델이 아니라 누끼 위 픽셀을 K-means로 3색 뽑아 Lab으로 재요.</p>
+    <p class="small">이 페이지 값: 로컬 개발 서버에서 앱과 같은 모델 파일(vision_model_q4.onnx, SHA <span id="sigSha"></span>…)과 판정 코드(classifier.mjs)로 2026-11-10에 계산. 사진은 앱 카탈로그 10벌.</p>
+  </div></details>
+</section>
+
+<!-- ③ 코디 -->
+<section class="pane" id="p3">
+  <div class="card">
+    <h2>내 옷장 10벌로 코디 짜기</h2>
+    <p class="small">추천 엔진 코드를 그대로 돌려요. 옷 종류는 ②에서 모델이 고른 값이에요. 옷을 누르면 빼고 넣을 수 있어요.</p>
+    <div class="ctl">
+      <div class="full"><label for="season">퍼스널컬러</label><select id="season"></select></div>
+      <div><label for="band">오늘 날씨</label><select id="band"></select></div>
+      <div><label for="mode">상황</label><select id="mode"></select></div>
+    </div>
+    <div class="palette" id="palette" aria-label="이 계절 팔레트"></div>
+  </div>
+
+  <div class="card">
+    <h3>1. 옷마다 퍼컬 점수</h3>
+    <p class="small">옷 대표 3색과 이 계절 팔레트 24색 중 가장 가까운 색의 거리(CIEDE2000)로 점수를 매겨요. 빨간 점선은 오늘 날씨에 빠지는 옷이에요.</p>
+    <div class="ward" id="ward"></div>
+  </div>
+
+  <div class="card">
+    <h3>2. 후보 만들기 → 3. 점수 매기기</h3>
+    <div class="funnel" id="funnel"></div>
+    <p class="small">총점 = 퍼컬 38% + 색 조화 28% + 날씨 22% + 바로 입기 12% (+상황·코디 보정). 앱처럼 점수순으로 세운 뒤, 비슷한 색 조합이 몰리지 않게 대표를 앞에 세워요.</p>
+    <div id="outfits"></div>
+  </div>
+
+  <div class="card">
+    <label class="toggle"><input type="checkbox" id="research"> 연구 모드: 벡터 궁합 점수로 다시 세우기</label>
+    <p class="small">두 옷의 FashionSigLIP 벡터를 학습한 신경망(MLP)에 넣어 "같이 입은 코디였을 법한 정도"를 점수로 내요. 이 10벌의 45쌍 점수는 그 모델의 실제 출력이에요.</p>
+    <div id="researchOut"></div>
+    <div class="honest"><b>정직하게</b> 이 모델(고정 시험 AUC 0.883, 4지선다 58.57%)은 공개 앱에 넣지 않았어요(학습 데이터 이용 조건). 개발용 경로에서만 쓰고, 사람이 "더 좋다"고 느끼는지는 평가하지 않았어요.</div>
+  </div>
+
+  <details class="deep"><summary>원리: 왜 규칙 점수 + 걸러내기인가</summary><div>
+    <p><b>먼저 거르고, 그다음 점수.</b> 날씨에 안 맞는 옷(예: 5~8도에 반팔)은 후보에서 빼요. 남은 옷으로 상의 × 하의 × (아우터 없음 또는 아우터 하나)를 모두 만들어요.</p>
+    <p><b>퍼컬 점수</b>는 옷 색과 계절 팔레트의 거리예요. 거리 5 이하면 거의 100점, 35를 넘으면 크게 깎여요. 회피색에 가까우면 감점해요.</p>
+    <p><b>색 조화</b>는 상하의 색상 각도·명도 차로 톤온톤/유사색/대비 등을 나누고 점수를 매겨요. <b>날씨</b>는 옷의 보온 단계와 기온 구간이 맞는지, <b>바로 입기</b>는 세탁 중 같은 상태예요.</p>
+    <p>가중치 38/28/22/12는 학습한 값이 아니라 설계값이에요. 한국 사용자의 "이 코디가 좋다" 정답 자료가 없어서 학습할 수 없었어요.</p>
+    <p><b>연구 모드</b>는 Polyvore 코디 자료로 학습한 MLP예요. 두 벡터 a, b를 [a+b, |a−b|, a×b]로 붙여 순서와 무관한 점수를 내요. 고정 시험에서 진짜·가짜 코디를 가르는 AUC가 색 규칙 0.486(찍기 수준) → 0.883이었어요. 다시 세울 때도 기본 1등보다 퍼컬·날씨가 5점 넘게 낮은 코디는 뒤로 보내요(δ=5).</p>
+  </div></details>
+</section>
+
+<p class="small" style="margin-top:24px">계산 코드: 앱 src의 추천 엔진·조명 모델·규칙 엔진을 고치지 않고 한 파일(cf-engine.js)로 묶었어요. 옷 사진: <a href="https://colorfit-two.vercel.app">ColorFit 앱</a>의 카탈로그 누끼.</p>
+</div>
+
+<script src="cf-engine.js"></script>
+<script src="demo-data.js"></script>
+<script>
+(() => {
+const D = window.DEMO, CF = window.CF;
+const $ = (s) => document.querySelector(s);
+const el = (tag, attrs = {}, html = '') => { const e = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); if (html) e.innerHTML = html; return e; };
+const IMG = (id) => `https://colorfit-two.vercel.app/catalog-cutout/${id}.webp`;
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+// 탭
+document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => {
+  document.querySelectorAll('.seg button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+  document.querySelectorAll('.pane').forEach((p) => p.classList.toggle('on', p.id === b.dataset.pane));
+  if (b.dataset.pane === 'p3') renderRec();
+  window.scrollTo({ top: $('.seg').offsetTop - 2, behavior: 'smooth' });
+}));
+
+// ---------- ① 조명 ----------
+const hex2 = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+const lin = (c) => { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+const enc = (v) => { v = Math.max(0, Math.min(1, v)); const s = v <= 0.0031308 ? v * 12.92 : 1.055 * v ** (1 / 2.4) - 0.055; return Math.round(s * 255); };
+const toHex = (a) => '#' + a.map((x) => x.toString(16).padStart(2, '0')).join('');
+const rgbStr = (h) => `rgb(${hex2(h).join(', ')})`;
+const Lstar = ([r, g, b]) => { const Y = 0.212671 * r + 0.71516 * g + 0.072169 * b; return 116 * (Y > 0.008856 ? Math.cbrt(Y) : 7.787 * Y + 16 / 116) - 16; };
+function gains(tint, bright) {
+  const u = Math.abs(tint) / 100; let r = 1, b = 1;
+  if (tint > 0) { r = 1 + 0.25 * u; b = 1 - 0.3 * u; } else if (tint < 0) { r = 1 - 0.2 * u; b = 1 + 0.3 * u; }
+  const y = 0.2127 * r + 0.7152 + 0.0722 * b; // 회색의 밝기는 그대로 두고 색만 바꾼다
+  return [r / y * bright, 1 / y * bright, b / y * bright];
+}
+const lightHex = (h, g) => toHex(hex2(h).map(lin).map((v, i) => enc(v * g[i])));
+const FACES = [
+  { name: '예시 1 · 검은 머리', skin: '#E6C0B4', hair: '#2A2626', eye: '#2E2A2C', lips: '#BE6F7A', std: [12, 12, 18] },
+  { name: '예시 2 · 갈색 머리', skin: '#E2B494', hair: '#5A3A26', eye: '#4A3022', lips: '#C77B6B', std: [12, 12, 18] },
+  { name: '예시 3 · 연갈색 머리', skin: '#F0CDBE', hair: '#8A6A50', eye: '#5A4636', lips: '#D88A88', std: [12, 12, 18] },
+];
+// 앞 4개는 조명 색만, 뒤 4개는 밝기도 바뀐다(Hybrid의 밝기 특징 6개가 움직이는 한계를 같이 보여 준다).
+const LIGHTS = [
+  { name: '노란 전구', t: 90, k: 100, g: 0 }, { name: '따뜻한 실내', t: 45, k: 100, g: 0 }, { name: '흐린 날', t: -45, k: 100, g: 0 }, { name: '파란 형광등', t: -90, k: 100, g: 0 },
+  { name: '어두운 방', t: 0, k: 60, g: 1 }, { name: '밝은 창가', t: 0, k: 140, g: 1 }, { name: '저녁 노을', t: 70, k: 70, g: 1 }, { name: '그늘', t: -70, k: 75, g: 1 },
+];
+let face = FACES[0];
+const FEAT_KO = ['피부 밝기', '피부 밝기 흩어짐', '머리 밝기', '머리 밝기 흩어짐', '눈 밝기', '눈 밝기 흩어짐', '피부−머리 ln(R/G)', '피부−머리 ln(B/G)', '피부−눈 ln(R/G)', '피부−눈 ln(B/G)', '머리−눈 ln(R/G)', '머리−눈 ln(B/G)'];
+const FEAT = ['L_mean_skin', 'L_std_skin', 'L_mean_hair', 'L_std_hair', 'L_mean_eye', 'L_std_eye', 'ln_rg_skin_minus_hair', 'ln_bg_skin_minus_hair', 'ln_rg_skin_minus_eye', 'ln_bg_skin_minus_eye', 'ln_rg_hair_minus_eye', 'ln_bg_hair_minus_eye'];
+// 실제 사진은 영역 픽셀 수천 개의 평균이라 8비트 반올림이 거의 사라진다. 그래서 특징은 반올림 전 값으로 재고, 센서처럼 1(=255)에서만 자른다.
+function stats(h, g = [1, 1, 1]) { const l = hex2(h).map((c, i) => Math.max(Math.min(1, lin(c) * g[i]), 1e-4)); return { L: Lstar(l), rg: Math.log(l[0] / l[1]), bg: Math.log(l[2] / l[1]) }; }
+function evaluate(f, tint, bright) {
+  const g = gains(tint, bright / 100);
+  const lit = { skin: lightHex(f.skin, g), hair: lightHex(f.hair, g), eye: lightHex(f.eye, g), lips: lightHex(f.lips, g) };
+  const s = stats(f.skin, g), h = stats(f.hair, g), e = stats(f.eye, g);
+  const b0 = { s: stats(f.skin), h: stats(f.hair), e: stats(f.eye) };
+  const sd = (i, now, base) => f.std[i] * (now + 16) / (base + 16);
+  const values = [s.L, sd(0, s.L, b0.s.L), h.L, sd(1, h.L, b0.h.L), e.L, sd(2, e.L, b0.e.L), s.rg - h.rg, s.bg - h.bg, s.rg - e.rg, s.bg - e.bg, h.rg - e.rg, h.bg - e.bg];
+  const feats = Object.fromEntries(FEAT.map((n, i) => [n, values[i]]));
+  const p = CF.predictResearchFamilyProbabilities(feats);
+  const rule = CF.analyzePhotoColors({ extractedColors: { skin: rgbStr(lit.skin), hair: rgbStr(lit.hair), eyes: rgbStr(lit.eye), lips: rgbStr(lit.lips) }, photoQuality: 0.8, measurementDetails: { faceBounds: { x: 0, y: 0, width: 1, height: 1 } } });
+  return { lit, values, p, warm: p.spring + p.autumn, ruleT: rule.measurementDetails.normalizedFeatures.temperature, ruleL: rule.temperature };
+}
+const ko = (w) => (w ? '웜' : '쿨');
+function renderLight() {
+  const tint = +$('#tint').value, bright = +$('#bright').value;
+  $('#tintV').textContent = tint === 0 ? '기본' : tint > 0 ? `노랗게 ${tint}` : `파랗게 ${-tint}`;
+  $('#brightV').textContent = `${bright}%`;
+  const base = evaluate(face, 0, 100), now = evaluate(face, tint, bright);
+  const g = gains(tint, bright / 100);
+  $('#fBg').setAttribute('fill', lightHex('#C9C6C0', g));
+  [['#fHairBack', 'hair'], ['#fHairTop', 'hair'], ['#fSkin', 'skin'], ['#fNeck', 'skin'], ['#fEyeL', 'eye'], ['#fEyeR', 'eye'], ['#fLips', 'lips']].forEach(([s, k]) => $(s).setAttribute('fill', now.lit[k]));
+  const ruleWarm = now.ruleL === 'warm', baseRuleWarm = base.ruleL === 'warm';
+  $('#ruleDot').style.left = `${(now.ruleT + 1) * 50}%`;
+  $('#ruleV').textContent = ko(ruleWarm); $('#ruleV').className = 'verdict ' + (ruleWarm ? 'w' : 'c');
+  $('#ruleTag').innerHTML = ruleWarm === baseRuleWarm ? '<span class="tag ok">기본과 같음</span>' : '<span class="tag no">판정 바뀜</span>';
+  $('#ruleN').textContent = `온도 지수 ${now.ruleT.toFixed(2)} (기본 ${base.ruleT.toFixed(2)})`;
+  const hw = now.warm >= 0.5, bhw = base.warm >= 0.5;
+  $('#hybDot').style.left = `${now.warm * 100}%`;
+  $('#hybV').textContent = `${ko(hw)} ${(Math.max(now.warm, 1 - now.warm) * 100).toFixed(0)}%`; $('#hybV').className = 'verdict ' + (hw ? 'w' : 'c');
+  $('#hybTag').innerHTML = hw === bhw ? '<span class="tag ok">기본과 같음</span>' : '<span class="tag no">판정 바뀜</span>';
+  const fam = [['봄', 'spring', 'var(--spring)'], ['가을', 'autumn', 'var(--autumn)'], ['여름', 'summer', 'var(--summer)'], ['겨울', 'winter', 'var(--winter)']];
+  $('#hybFam').innerHTML = fam.map(([n, k, c]) => `<span>${n}</span><i style="width:${(now.p[k] * 100).toFixed(1)}%;background:${c}"></i><span>${(now.p[k] * 100).toFixed(0)}%</span>`).join('');
+  $('#ftab').innerHTML = '<tr><td></td><td class="n small">기본</td><td class="n small">지금</td><td></td></tr>' + FEAT_KO.map((n, i) => {
+    const d = now.values[i] - base.values[i], isRatio = i >= 6, fx = isRatio ? 3 : 1;
+    const same = Math.abs(d) < (isRatio ? 0.005 : 0.05);
+    return `<tr><td>${n}</td><td class="n">${base.values[i].toFixed(fx)}</td><td class="n">${now.values[i].toFixed(fx)}</td><td class="n">${same ? '<span class="tag ok">그대로</span>' : `<span class="tag ${isRatio ? 'no' : 'warn'}">${d > 0 ? '+' : ''}${d.toFixed(fx)}</span>`}</td></tr>`;
+  }).join('');
+  document.querySelectorAll('#lightPick .chip').forEach((c) => c.setAttribute('aria-pressed', String(+c.dataset.t === tint && +c.dataset.k === bright)));
+}
+function renderSweep() {
+  const base = evaluate(face, 0, 100);
+  const cell = (ok, txt, n) => `${ok ? '✓' : '<b style="color:var(--bad)">✗</b>'} ${txt} <span class="small">${n}</span>`;
+  // 움직인 폭은 각자 눈금 전체 대비 %: 규칙 온도 지수는 −1~1(폭 2), Hybrid 웜 확률은 0~1(폭 1).
+  const group = (g, title) => {
+    let rf = 0, hf = 0, rMove = 0, hMove = 0;
+    const rows = LIGHTS.filter((L) => L.g === g).map((L) => {
+      const r = evaluate(face, L.t, L.k);
+      const rOk = (r.ruleL === 'warm') === (base.ruleL === 'warm'), hOk = (r.warm >= 0.5) === (base.warm >= 0.5);
+      rf += rOk ? 0 : 1; hf += hOk ? 0 : 1;
+      rMove = Math.max(rMove, Math.abs(r.ruleT - base.ruleT) / 2); hMove = Math.max(hMove, Math.abs(r.warm - base.warm));
+      return `<tr><td>${L.name}</td><td>${cell(rOk, ko(r.ruleL === 'warm'), r.ruleT.toFixed(2))}</td><td>${cell(hOk, ko(r.warm >= 0.5), (r.warm * 100).toFixed(0) + '%')}</td></tr>`;
+    });
+    return `<tr><th colspan="3" style="text-align:left;padding-top:12px">${title}</th></tr>${rows.join('')}<tr style="font-weight:800"><td>판정 바뀜 · 최대 움직임</td><td>${rf}/4 · ${(rMove * 100).toFixed(0)}%</td><td>${hf}/4 · ${(hMove * 100).toFixed(0)}%</td></tr>`;
+  };
+  $('#sweep').innerHTML = `<thead><tr><th>조명</th><th>예전 규칙 (지수)</th><th>Hybrid (웜 확률)</th></tr></thead><tbody><tr><td>기본</td><td>${ko(base.ruleL === 'warm')} <span class="small">${base.ruleT.toFixed(2)}</span></td><td>${ko(base.warm >= 0.5)} <span class="small">${(base.warm * 100).toFixed(0)}%</span></td></tr>${group(0, '조명 색만 바뀜')}${group(1, '밝기도 바뀜')}</tbody>`;
+}
+FACES.forEach((f, i) => { const c = el('button', { type: 'button', class: 'chip', 'aria-pressed': String(i === 0) }, esc(f.name)); c.addEventListener('click', () => { face = f; document.querySelectorAll('#facePick .chip').forEach((x) => x.setAttribute('aria-pressed', String(x === c))); renderLight(); renderSweep(); }); $('#facePick').append(c); });
+[{ name: '기본', t: 0, k: 100 }, ...LIGHTS].forEach((L) => { const c = el('button', { type: 'button', class: 'chip', 'data-t': L.t, 'data-k': L.k }, esc(L.name)); c.addEventListener('click', () => { $('#tint').value = L.t; $('#bright').value = L.k; renderLight(); }); $('#lightPick').append(c); });
+$('#tint').addEventListener('input', renderLight); $('#bright').addEventListener('input', renderLight);
+renderLight(); renderSweep();
+
+// ---------- ② 옷 ----------
+const ITEMS = D.items;
+const typeOf = Object.fromEntries(ITEMS.map((it) => [it.catalogItemId, it.pred]));
+const f32 = (b64) => new Float32Array(Uint8Array.from(atob(b64), (c) => c.charCodeAt(0)).buffer);
+const EMB = Object.fromEntries(ITEMS.map((it) => [it.catalogItemId, f32(it.emb)]));
+const dot = (a, b) => { let s = 0; for (let i = 0; i < a.length; i++) s += a[i] * b[i]; return s; };
+$('#sigSha').textContent = D.siglip.sha;
+let picked = ITEMS[1].catalogItemId;
+function drawVec(canvas, b64) {
+  const q = new Int8Array(Uint8Array.from(atob(b64), (c) => c.charCodeAt(0)).buffer);
+  const W = 48, H = 16, ctx = canvas.getContext('2d'); canvas.width = W; canvas.height = H;
+  const img = ctx.createImageData(W, H);
+  for (let i = 0; i < 768; i++) {
+    const v = Math.max(-1, Math.min(1, q[i] / 16)); const a = Math.abs(v);
+    const [r, g, b] = v >= 0 ? [255 - 63 * a, 255 - 150 * a, 255 - 215 * a] : [255 - 200 * a, 255 - 150 * a, 255 - 60 * a];
+    img.data.set([r, g, b, 255], i * 4);
+  }
+  ctx.putImageData(img, 0, 0);
+}
+function renderThumbs() {
+  $('#thumbs').innerHTML = '';
+  ITEMS.forEach((it) => {
+    const b = el('button', { type: 'button', class: 'thumb', 'aria-pressed': String(it.catalogItemId === picked), 'aria-label': `${typeOf[it.catalogItemId]} 보기` }, `<img src="${IMG(it.catalogItemId)}" alt="" loading="lazy">${it.ask ? '<span class="q">?</span>' : ''}`);
+    b.addEventListener('click', () => { picked = it.catalogItemId; renderThumbs(); renderItem(); });
+    $('#thumbs').append(b);
+  });
+}
+// classifier.mjs와 같은 순서: 차이가 τ보다 작으면 → 대분류가 다르면 → 슬랙스·면바지면 고르기.
+const SLEEVED = /^(반팔 |긴팔 )?(티셔츠|셔츠|블라우스|니트|가디건)$/;
+function askWhy(it) {
+  if (!it.ask) return '≥ 기준 0.0145 → 자동 결정';
+  if (it.margin < D.siglip.tau) return '&lt; 기준 0.0145 → 애매해서 <b>두 개 중 고르기</b>';
+  if (it.ranked[0][1] !== it.ranked[1][1]) return '· 1·2등의 대분류가 달라 <b>두 개 중 고르기</b>';
+  return '≥ 기준이지만 슬랙스·면바지는 규칙상 <b>늘 사람이 고르기</b>';
+}
+function renderItem() {
+  const it = ITEMS.find((x) => x.catalogItemId === picked);
+  const max = it.top[0][1];
+  const near = ITEMS.filter((x) => x !== it).map((x) => [x, dot(EMB[it.catalogItemId], EMB[x.catalogItemId])]).sort((a, b) => b[1] - a[1]).slice(0, 3);
+  const labelDiff = it.catalogLabel !== it.pred && !it.choices.includes(it.catalogLabel);
+  $('#itemCard').innerHTML = `
+    <div class="detail"><img src="${IMG(it.catalogItemId)}" alt="">
+      <div><h3>모델 판정: ${esc(typeOf[it.catalogItemId])} <span class="small">(${esc(it.category)})</span></h3>
+        <div class="small">숫자 768개(사진 벡터) — 주황 +, 파랑 −</div><canvas class="vec" id="vec" aria-label="768차원 벡터 그림"></canvas>
+        <div class="small" style="margin-top:6px">대표 3색 (K-means)</div>
+        <div class="dom">${it.dominantColors.map((c) => `<span style="flex:${c.ratio};background:${c.hex}" title="${c.hex} ${(c.ratio * 100).toFixed(0)}%"></span>`).join('')}</div>
+      </div></div>
+    <h3 style="margin-top:12px">문구와 가까운 정도 (코사인)</h3>
+    <div class="bars num">${it.top.map(([p, s], i) => `<span class="lbl">${esc(p)}</span><i class="${i === 0 ? 'top' : ''}" style="width:${Math.max(4, (s / max) * 100)}%"></i><span>${s.toFixed(3)}</span>`).join('')}</div>
+    <h3 style="margin-top:12px">종류 52종으로 묶으면</h3>
+    <div class="bars num">${it.ranked.slice(0, 3).map(([t, c, s], i) => `<span class="lbl">${esc(t)}</span><i class="${i === 0 ? 'top' : ''}" style="width:${Math.max(4, (s / it.ranked[0][2]) * 100)}%"></i><span>${s.toFixed(3)}</span>`).join('')}</div>
+    <p class="small num">1등−2등 차이 ${it.margin.toFixed(4)} ${askWhy(it)}${SLEEVED.test(it.pred) ? ` · 소매(반팔−긴팔) ${it.sleeve.toFixed(4)} → ${it.sleeve > 0 ? '반팔' : '긴팔'}` : ''}</p>
+    ${it.ask ? `<div class="chips" role="group" aria-label="종류 고르기">${it.choices.map((c) => `<button type="button" class="chip" data-choice="${esc(c)}" aria-pressed="${typeOf[it.catalogItemId] === c}">${esc(c)}</button>`).join('')}</div><p class="small">고른 값이 ③ 코디 짜기에 바로 들어가요.</p>` : ''}
+    ${labelDiff ? `<p class="small"><span class="tag warn">참고</span> 카탈로그 원래 라벨은 "${esc(it.catalogLabel)}"인데 사진을 보면 모델 판정이 더 맞아요.</p>` : ''}
+    <h3 style="margin-top:12px">벡터가 가장 가까운 옷</h3>
+    <div class="row" style="gap:8px">${near.map(([x, s]) => `<div style="flex:1;text-align:center"><img src="${IMG(x.catalogItemId)}" alt="" style="width:100%;aspect-ratio:1;object-fit:contain;background:var(--deep);border-radius:10px"><div class="small num">${s.toFixed(2)}</div></div>`).join('')}</div>`;
+  drawVec($('#vec'), it.q8);
+  $('#itemCard').querySelectorAll('[data-choice]').forEach((b) => b.addEventListener('click', () => { typeOf[it.catalogItemId] = b.dataset.choice; renderItem(); }));
+}
+renderThumbs(); renderItem();
+
+// ---------- ③ 코디 ----------
+CF.SEASON_ORDER.forEach((id) => $('#season').append(el('option', { value: id }, esc(CF.SEASON_PROFILES[id].name))));
+$('#season').value = 'true-autumn';
+CF.WEATHER_BAND_ORDER.forEach((b) => $('#band').append(el('option', { value: b }, esc(b))));
+$('#band').value = '5~8도';
+['데일리', '출근', '데이트', '발표'].forEach((m) => $('#mode').append(el('option', { value: m }, m)));
+const off = new Set();
+const keyOf = Object.keys(D.compat.pairs).reduce((m, k) => { m[k] = D.compat.pairs[k]; return m; }, {});
+const ORDER = ITEMS.map((it) => it.catalogItemId);
+const pairLogit = (a, b) => { const [x, y] = ORDER.indexOf(a) < ORDER.indexOf(b) ? [a, b] : [b, a]; return keyOf[`${x}|${y}`]; };
+function compatOf(outfit) { const ids = outfit.items.map((i) => i.catalogItemId); let s = 0, n = 0; for (let i = 0; i < ids.length; i++) for (let j = i + 1; j < ids.length; j++) { s += pairLogit(ids[i], ids[j]); n++; } return s / n; }
+function makeItems() {
+  return ITEMS.filter((it) => !off.has(it.catalogItemId)).map((c) => ({
+    id: 'd-' + c.catalogItemId, wardrobeId: 'demo', imageUrl: c.imageUrl, category: c.category, type: typeOf[c.catalogItemId], color: c.color, size: c.size, brand: c.brand,
+    createdAt: '2026-11-10T00:00:00Z', representativeColor: c.representativeColor, representativeHex: c.representativeHex, dominantColors: c.dominantColors,
+    seasonTag: CF.normalizeSeasonTag(c.seasonTag), patternType: c.patternType, material: c.material, availabilityStatus: '보유중',
+    isNeutral: c.isNeutral || CF.isAchromatic(c.representativeHex), isDenim: c.isDenim, denimWash: c.denimWash, sourceType: 'catalog', catalogItemId: c.catalogItemId,
+  }));
+}
+const AX = [['퍼컬', 'personal', 'personalScore', 'var(--autumn)'], ['색 조화', 'harmony', 'harmonyScore', 'var(--summer)'], ['날씨', 'weather', 'weatherScore', 'var(--good)'], ['바로 입기', 'stability', 'stabilityScore', 'var(--muted)']];
+function outfitHtml(o, rank, extra = '') {
+  return `<div class="outfit"><div class="imgs">${o.items.map((i) => `<img src="${IMG(i.catalogItemId)}" alt="${esc(i.type)}">`).join('')}</div>
+    <div><div class="row" style="justify-content:space-between"><span class="rank">${rank}등 · ${esc(o.title)}</span><span class="score num">${o.score}</span></div>
+    <div class="small">${o.items.map((i) => esc(i.type)).join(' + ')}</div>${extra}
+    <div class="axes num">${AX.map(([n, k, raw, c]) => `<span>${n}</span><i style="width:${o[raw]}%;background:${c}"></i><span>${o.scoreBreakdown[k]}</span>`).join('')}</div></div></div>`;
+}
+let last = null;
+function renderRec() {
+  const season = $('#season').value, band = $('#band').value, mode = $('#mode').value;
+  const result = CF.buildKnownSeasonResult(season);
+  $('#palette').innerHTML = result.palette.map((h) => `<span style="background:${h}" title="${h}"></span>`).join('');
+  const scored = makeItems().map((i) => CF.scoreItemForPersonalColor(i, result));
+  const kept = new Set(CF.filterByWeather(scored, band).map((i) => i.id));
+  $('#ward').innerHTML = '';
+  ITEMS.forEach((c) => {
+    const s = scored.find((x) => x.catalogItemId === c.catalogItemId);
+    const b = el('button', { type: 'button', class: 'wi' + (off.has(c.catalogItemId) ? ' off' : '') + (s && !kept.has(s.id) ? ' cold' : ''), 'aria-pressed': String(!off.has(c.catalogItemId)), title: s ? s.fitReason : '뺀 옷' },
+      `<img src="${IMG(c.catalogItemId)}" alt=""><span class="s num">${s ? s.personalFitScore : '–'}</span><span class="t">${esc(typeOf[c.catalogItemId])}</span>`);
+    b.addEventListener('click', () => { off.has(c.catalogItemId) ? off.delete(c.catalogItemId) : off.add(c.catalogItemId); renderRec(); });
+    $('#ward').append(b);
+  });
+  const k = scored.filter((i) => kept.has(i.id));
+  const nt = k.filter((i) => i.category === '상의').length, nb = k.filter((i) => i.category === '하의').length, no = k.filter((i) => i.category === '아우터').length;
+  const out = CF.buildRecommendationsV2(scored, band, mode, result);
+  last = { out, band, mode };
+  $('#funnel').innerHTML = `<span>날씨로 거른 뒤 상의 <b>${nt}</b> × 하의 <b>${nb}</b> × (아우터 없음 + <b>${no}</b>)</span><span>= 후보 <b>${nt * nb * (1 + no)}</b>개</span><span>→ 점수 매겨 상위 <b>${out.recommendations.length}</b>개</span>`;
+  $('#outfits').innerHTML = out.recommendations.length ? out.recommendations.slice(0, 3).map((o, i) => outfitHtml(o, i + 1)).join('') + (out.recommendations[0] ? `<details class="deep"><summary>1등 설명 문장 보기 (앱이 만든 그대로)</summary><div><ul>${out.recommendations[0].explanationBullets.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div></details>` : '') : '<p class="small">이 조건에서 입을 수 있는 상의·하의 짝이 없어요.</p>';
+  renderResearch();
+}
+function renderResearch() {
+  const box = $('#researchOut');
+  if (!$('#research').checked || !last || !last.out.recommendations.length) { box.innerHTML = ''; return; }
+  const base = last.out.recommendations;
+  const byCompat = [...base].sort((a, b) => compatOf(b) - compatOf(a));
+  const ordered = CF.finishCompatibilityOrder(last.out.baselineTop, byCompat, last.band, last.mode, {}, true);
+  const mini = (o, i) => { const was = base.indexOf(o) + 1, moved = was - (i + 1);
+    return `<div class="outfit" style="grid-template-columns:auto 1fr"><div class="imgs">${o.items.map((x) => `<img src="${IMG(x.catalogItemId)}" alt="${esc(x.type)}">`).join('')}</div>
+      <div><div class="rank">${i + 1}등 · 궁합 <span class="num">${compatOf(o).toFixed(2)}</span></div><div class="small">${o.items.map((x) => esc(x.type)).join(' + ')}</div>
+      <div class="moved" style="color:var(--muted)">기본 ${was}등${moved ? (moved > 0 ? ` → ${moved}칸 올라옴` : ` → ${-moved}칸 내려감`) : ' 그대로'} · 퍼컬 ${o.personalScore} · 날씨 ${o.weatherScore}</div></div></div>`; };
+  // 상의×하의 짝만 모아 모델이 가장 높게·낮게 본 짝을 보여 준다(같은 10벌, 같은 45쌍 점수).
+  const ids = ITEMS.filter((x) => !off.has(x.catalogItemId));
+  const tb = ids.filter((x) => x.category === '상의').flatMap((t) => ids.filter((x) => x.category === '하의').map((b) => [t, b, pairLogit(t.catalogItemId, b.catalogItemId)])).sort((a, b) => b[2] - a[2]);
+  const pairRow = ([t, b, s]) => `<div style="flex:1;min-width:0;text-align:center"><div class="row" style="gap:2px;justify-content:center"><img src="${IMG(t.catalogItemId)}" alt="" style="width:44%;aspect-ratio:1;object-fit:contain;background:var(--deep);border-radius:8px"><img src="${IMG(b.catalogItemId)}" alt="" style="width:44%;aspect-ratio:1;object-fit:contain;background:var(--deep);border-radius:8px"></div><div class="small num">${s.toFixed(2)}</div></div>`;
+  box.innerHTML = (tb.length >= 2 ? `<h3>모델이 본 상의·하의 짝</h3><div class="small">가장 높게</div><div class="row" style="gap:6px">${tb.slice(0, 3).map(pairRow).join('')}</div><div class="small" style="margin-top:6px">가장 낮게</div><div class="row" style="gap:6px">${tb.slice(-3).reverse().map(pairRow).join('')}</div>` : '')
+    + `<h3 style="margin-top:14px">궁합 점수만으로 세우면</h3>${byCompat.slice(0, 3).map(mini).join('')}`
+    + `<h3 style="margin-top:14px">앱 안전 규칙(δ=5)까지 적용하면</h3><p class="small">기본 1등보다 퍼컬·날씨가 5점 넘게 낮은 코디를 일단 뒤로 보낸 뒤, 비슷한 색 조합이 몰리지 않게 대표를 앞에 세워요(앱 개발 경로와 같은 순서). 1등은 지켜지고, 2·3등에는 다시 올라올 수도 있어요.</p>${ordered.slice(0, 3).map(mini).join('')}`
+    + '<p class="small">궁합 점수는 확률이 아닌 원점수(logit)예요. 코디 점수 = 옷 두 벌씩 짝지은 점수의 평균.</p>';
+}
+['#season', '#band', '#mode'].forEach((s) => $(s).addEventListener('change', renderRec));
+$('#research').addEventListener('change', renderResearch);
+renderRec();
+})();
+</script>
+</body>
+</html>
